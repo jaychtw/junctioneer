@@ -11,7 +11,8 @@
     "test:e2e": "playwright test",
     "validate:levels": "tsx scripts/validate-levels.ts",
     "capture": "tsx scripts/capture.ts",
-    "format": "prettier --write src tests scripts *.ts *.json index.html"
+    "format": "prettier --write src tests scripts *.ts *.json index.html",
+    "build:review": "npm run build && tsx scripts/prepare-review.ts"
   },
   "dependencies": {
     "three": "0.186.1"

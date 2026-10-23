@@ -1,0 +1,17 @@
+{
+  "checkedAt": "2026-10-23T13:37:10.413Z",
+  "scope": "Local production deployment artifact mounted under /junctioneer/; not a live GitHub Pages check",
+  "checks": {
+    "meaningfulGameplay": "failure/retry/zh-TW success",
+    "galleryImages": 14,
+    "imageHashes": "all identical to preserved originals",
+    "videoDurationSeconds": 31.32,
+    "layoutWidths": [
+      320,
+      390,
+      768,
+      1440
+    ],
+    "pageErrors": []
+  }
+}

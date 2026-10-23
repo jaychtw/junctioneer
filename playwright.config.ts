@@ -5,7 +5,9 @@ export default defineConfig({
   fullyParallel: false,
   workers: 1,
   timeout: 45000,
-  reporter: [["list"], ["html", { open: "never" }]],
+  reporter: process.env.CI
+    ? [["list"], ["github"], ["html", { open: "never" }]]
+    : [["list"], ["html", { open: "never" }]],
   use: {
     baseURL: "http://127.0.0.1:5173",
     headless: true,
