@@ -1,0 +1,7 @@
+{
+  "application_checkpoint": "95711eaeaf4d43b5cf8e19439f73e5eea629b274",
+  "checkpoint_tag": "poc-visual-checkpoint-01",
+  "scope": "Three-level preserved POC and original review evidence; visual approval pending",
+  "review_path": "review/",
+  "original_evidence_manifest": "review/evidence/capture-manifest.json"
+}

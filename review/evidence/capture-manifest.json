@@ -1,0 +1,136 @@
+{
+  "createdAt": "2026-10-23T13:18:20.673Z",
+  "browser": "154.0.8037.57",
+  "build": "Production Vite build served by vite preview",
+  "captures": [
+    {
+      "file": "poc-320-en.png",
+      "width": 320,
+      "language": "en",
+      "state": "L01 planning",
+      "renderCalls": "145",
+      "triangles": "37600"
+    },
+    {
+      "file": "poc-320-zh-TW.png",
+      "width": 320,
+      "language": "zh-TW",
+      "state": "L01 planning",
+      "renderCalls": "145",
+      "triangles": "37600"
+    },
+    {
+      "file": "poc-390-en.png",
+      "width": 390,
+      "language": "en",
+      "state": "L01 planning",
+      "renderCalls": "145",
+      "triangles": "37600"
+    },
+    {
+      "file": "poc-390-zh-TW.png",
+      "width": 390,
+      "language": "zh-TW",
+      "state": "L01 planning",
+      "renderCalls": "145",
+      "triangles": "37600"
+    },
+    {
+      "file": "poc-mobile-zoom-zh-TW.png",
+      "width": 390,
+      "language": "zh-TW",
+      "state": "1.8× zoom with pan"
+    },
+    {
+      "file": "poc-768-en.png",
+      "width": 768,
+      "language": "en",
+      "state": "L01 planning",
+      "renderCalls": "145",
+      "triangles": "37600"
+    },
+    {
+      "file": "poc-768-zh-TW.png",
+      "width": 768,
+      "language": "zh-TW",
+      "state": "L01 planning",
+      "renderCalls": "145",
+      "triangles": "37600"
+    },
+    {
+      "file": "poc-1440-en.png",
+      "width": 1440,
+      "language": "en",
+      "state": "L01 planning",
+      "renderCalls": "145",
+      "triangles": "37600"
+    },
+    {
+      "file": "poc-1440-zh-TW.png",
+      "width": 1440,
+      "language": "zh-TW",
+      "state": "L01 planning",
+      "renderCalls": "145",
+      "triangles": "37600"
+    },
+    {
+      "file": "poc-desktop-moving.png",
+      "width": 1440,
+      "language": "en",
+      "state": "L01 train moving, switches locked"
+    },
+    {
+      "file": "poc-desktop-blocked.png",
+      "width": 1440,
+      "language": "en",
+      "state": "L01 blocked siding, safe stop"
+    },
+    {
+      "file": "poc-desktop-arrival.png",
+      "width": 1440,
+      "language": "en",
+      "state": "L01 successful station arrival"
+    },
+    {
+      "file": "poc-desktop-two-switches.png",
+      "width": 1440,
+      "language": "en",
+      "state": "L02 selected route through two junctions"
+    },
+    {
+      "file": "poc-desktop-scenic.png",
+      "width": 1440,
+      "language": "en",
+      "state": "L03 selected detour, visibly blocked shortcut"
+    }
+  ],
+  "video": "poc-playthrough.webm",
+  "videoMethod": "Chrome DevTools screencast frames with original timestamps, encoded with installed system FFmpeg",
+  "videoFrames": 196,
+  "errors": [],
+  "hashes": {
+    "src/engine.ts": "6ecf9b02a40d94bed186b73643e16d21d3f52ea62c35777ef178dc31140d9265",
+    "src/i18n.ts": "5d568ff70bbf71e10f88d011523d544617cae22930920cea848a3db063b2b931",
+    "src/levels.ts": "5f00b67b1561ba10ed97e4bf302abdeeef7e1efd1365a524df20d4032e354d6d",
+    "src/main.ts": "38d1bc3abf42368de2e58fb53772f3f5ce7a51837c358f06e2d31118395a5c14",
+    "src/scene.ts": "5fad6d8ad74ed2bf183e93ab5bebafbbbfdc730003a041594c927dc397ac1435",
+    "src/storage.ts": "6d46f9f2810dc34e547408bc389f2721ec9d7d0a15d0ad209e4f7a1417d883c2",
+    "src/style.css": "c209bd7fdfbede90ac709dc5be0adfccdaaf9b9699a486670133dcb7756342fd",
+    "src/vite-env.d.ts": "65996936fbb042915f7b74a200fcdde7e410f32a669b1ab9597cfaa4b0faddb5",
+    "docs/evidence/poc-1440-en.png": "6ac29fd86298580ab4012a799400463a4d4dfe9f4c67cfe466395f6a80b4c0db",
+    "docs/evidence/poc-1440-zh-TW.png": "ed442656badad190ce962eb4fd4607ef2898b3730b6aa11f34a53f7aee00c7a8",
+    "docs/evidence/poc-320-en.png": "d24fd7138348df21379367161f4a25e7dd72f38d6fb69682f86aeefff967e99f",
+    "docs/evidence/poc-320-zh-TW.png": "bb621edb875b08e4a05af93f23567c08b92890cd5b0191f375c66f84bb48b0ac",
+    "docs/evidence/poc-390-en.png": "b5b2b5789462805bed4730253a4c8f7fac3ac9f03df8e51e633e7cee4d136615",
+    "docs/evidence/poc-390-zh-TW.png": "383b851d66efd050c7e606d5a5361a20e93a4268c7d5ac6c9bf204e7a904abba",
+    "docs/evidence/poc-768-en.png": "c409ebbb9feba75ddad4e1a3ea8bc99f0df0fb8c08a83edc57ad07e7f5838373",
+    "docs/evidence/poc-768-zh-TW.png": "57c8c71c3d5d20072094e24a56686b9096a31540b419e375aa507f047d90736d",
+    "docs/evidence/poc-desktop-arrival.png": "6a7a1d10fcdf52840afc89e98d28959ab10b865448315c8acd39e9ed7622337a",
+    "docs/evidence/poc-desktop-blocked.png": "07452f854db50e3ac5a4e83273040f9cc8c7cff607e6eb9f1ef036006fba1496",
+    "docs/evidence/poc-desktop-moving.png": "37cb646ffc687d00017f17da809bcd8abf54abd8d3c75d48ea35c7f15f2d5fbf",
+    "docs/evidence/poc-desktop-scenic.png": "73acc3222bceae414c0fb6ae8dd93edda1d377c686eeecc7e3af14887f6556be",
+    "docs/evidence/poc-desktop-two-switches.png": "ee44066f360cc80c476be1e64fc8ef35f0b8ff3a2de8578215f63194fb7d3f1a",
+    "docs/evidence/poc-mobile-zoom-zh-TW.png": "23eec2008a19923d574647198b139fb6ea2d3785039c979fc3d472e8b7dba686",
+    "docs/evidence/poc-playthrough.webm": "557bf04e919be013c984b8c9df53590c0b228e139591d6cfe6deb4a85903da29"
+  }
+}
