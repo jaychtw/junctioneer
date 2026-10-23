@@ -23,3 +23,12 @@ Local unit suite: **72 passed**. Local browser suite: **32 passed**, including a
 Physical-device performance, screen readers and independent-player testing remain unperformed. The reviewed visual direction is approved; final full-production acceptance is separate.
 
 Hosted setup correction: the dependency-install step on `ubuntu-latest` stalled. QA now pins the supported Ubuntu 24.04 runner and uses its preinstalled Google Chrome (`/usr/bin/google-chrome`), verified against the official runner image software manifest. The same 32 tests still execute; no browser assertion or scenario is removed.
+
+## Public-build verification — passed
+
+- Hosted QA: https://github.com/jaychtw/junctioneer/actions/runs/39971314038 — passed (72 unit / 32 browser tests).
+- Deployment: https://github.com/jaychtw/junctioneer/actions/runs/39971779830 — passed.
+- Public site: https://jaychtw.github.io/junctioneer/ .
+- All **12 live Skip regressions passed**, 0 failed, 0 skipped. Full run data: [live-skip-results.json](fix-evidence/live-skip-results.json). HTTPS checks remained enabled.
+- The post-fix GPU reproduction shows an immediate terminal draw in all three levels (145 / 153 / 145 draw calls), compared with zero before the correction.
+- The user’s condition for starting production is now met. Original POC snapshot remains `poc-visual-checkpoint-01`; the fixed source is separately tagged `poc-skip-fixed-01`.
