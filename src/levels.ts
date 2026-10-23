@@ -1,0 +1,121 @@
+import type { Level, Rail, Port } from "./engine";
+const rail = (
+  id: string,
+  x: number,
+  z: number,
+  ports: Port[],
+  extra: Partial<Rail> = {},
+): Rail => ({ id, x, z, ports, kind: "rail", ...extra });
+const terminal = (
+  id: string,
+  x: number,
+  z: number,
+  port: Port,
+  end?: "start" | "dead",
+): Rail => rail(id, x, z, [port], { kind: "terminus", end });
+const junction = (
+  id: string,
+  x: number,
+  z: number,
+  stem: Port,
+  branches: [Port, Port],
+  initial: 0 | 1,
+): Rail =>
+  rail(id, x, z, [stem, ...branches], {
+    kind: "junction",
+    stem,
+    branches,
+    initial,
+  });
+export const levels: Level[] = [
+  {
+    id: "L01",
+    number: 1,
+    chapter: 1,
+    size: 5,
+    name: ["All Aboard", "準備出發"],
+    hint: [
+      "One little switch. Two possible journeys. Choose the rail to the station.",
+      "一個小轉轍器，兩條路。選好通往車站的鐵軌吧。",
+    ],
+    rationale:
+      "One independent switch. Read its selected connection; distinguish station from a visibly blocked siding.",
+    start: { node: "start", exit: "E" },
+    stops: [],
+    destination: "station",
+    groups: [],
+    canonical: { J1: 1 },
+    rails: [
+      terminal("start", 0, 2, "E", "start"),
+      rail("approach", 1, 2, ["W", "E"]),
+      junction("J1", 2, 2, "W", ["N", "E"], 0),
+      rail("home", 3, 2, ["W", "E"]),
+      terminal("station", 4, 2, "W"),
+      rail("bend", 2, 1, ["S", "E"]),
+      rail("siding", 3, 1, ["W", "E"]),
+      terminal("works", 4, 1, "W", "dead"),
+    ].map((r) => (r.id === "works" ? { ...r, blocked: true } : r)),
+  },
+  {
+    id: "L02",
+    number: 2,
+    chapter: 1,
+    size: 5,
+    name: ["Two Decisions", "兩次選擇"],
+    hint: [
+      "Plan both junctions before the whistle. The station is up the hill.",
+      "鳴笛前，先設定兩個轉轍器。車站就在山坡上。",
+    ],
+    rationale:
+      "Two independent switches in sequence. The first selects continuation, the second distinguishes the station branch from works.",
+    start: { node: "start", exit: "E" },
+    stops: [],
+    destination: "station",
+    groups: [],
+    canonical: { J1: 1, J2: 0 },
+    rails: [
+      terminal("start", 0, 3, "E", "start"),
+      rail("approach", 1, 3, ["W", "E"]),
+      junction("J1", 2, 3, "W", ["E", "N"], 0),
+      rail("siding", 3, 3, ["W", "E"]),
+      terminal("end", 4, 3, "W", "dead"),
+      rail("bend", 2, 2, ["S", "E"]),
+      junction("J2", 3, 2, "W", ["N", "E"], 1),
+      rail("hill", 3, 1, ["S", "N"]),
+      terminal("station", 3, 0, "S"),
+      { ...terminal("works", 4, 2, "W", "dead"), blocked: true },
+    ],
+  },
+  {
+    id: "L03",
+    number: 3,
+    chapter: 1,
+    size: 5,
+    name: ["Scenic Route", "沿途風景"],
+    hint: [
+      "The shortcut is closed. A longer journey can be the right one.",
+      "捷徑施工中。有時候，繞遠路才是正確的選擇。",
+    ],
+    rationale:
+      "A visibly blocked shortcut invites inspection of a long route. Four curves establish continuous, inspectable port geometry.",
+    start: { node: "start", exit: "E" },
+    stops: [],
+    destination: "station",
+    groups: [],
+    canonical: { J1: 0 },
+    rails: [
+      terminal("start", 0, 2, "E", "start"),
+      rail("approach", 1, 2, ["W", "E"]),
+      junction("J1", 2, 2, "W", ["N", "E"], 1),
+      rail("rise", 2, 1, ["S", "N"]),
+      rail("bend1", 2, 0, ["S", "E"]),
+      rail("ridge", 3, 0, ["W", "E"]),
+      rail("bend2", 4, 0, ["W", "S"]),
+      rail("east1", 4, 1, ["N", "S"]),
+      rail("east2", 4, 2, ["N", "S"]),
+      terminal("station", 4, 3, "N"),
+      { ...rail("works", 3, 2, ["W", "S"]), blocked: true },
+      terminal("end", 3, 3, "N", "dead"),
+    ],
+  },
+];

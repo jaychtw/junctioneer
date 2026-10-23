@@ -1,0 +1,134 @@
+
+> junctioneer@0.1.0 validate:levels
+> tsx scripts/validate-levels.ts
+
+{
+  "scope": "Visual-gate POC: three representative levels. Levels 4–15 pending approval and production.",
+  "levels": [
+    {
+      "id": "L01",
+      "name": "All Aboard",
+      "switches": 1,
+      "independentControls": 1,
+      "settingsChecked": 2,
+      "solutionCount": 1,
+      "canonical": {
+        "J1": 1
+      },
+      "route": [
+        "start",
+        "approach",
+        "J1",
+        "home",
+        "station"
+      ],
+      "routeLength": 5,
+      "outcomes": {
+        "blocked": 1,
+        "success": 1
+      },
+      "failures": [
+        {
+          "settings": {
+            "J1": 0
+          },
+          "reason": "blocked",
+          "at": "works"
+        }
+      ],
+      "difficulty": "One independent switch. Read its selected connection; distinguish station from a visibly blocked siding."
+    },
+    {
+      "id": "L02",
+      "name": "Two Decisions",
+      "switches": 2,
+      "independentControls": 2,
+      "settingsChecked": 4,
+      "solutionCount": 1,
+      "canonical": {
+        "J1": 1,
+        "J2": 0
+      },
+      "route": [
+        "start",
+        "approach",
+        "J1",
+        "bend",
+        "J2",
+        "hill",
+        "station"
+      ],
+      "routeLength": 7,
+      "outcomes": {
+        "dead-end": 2,
+        "blocked": 1,
+        "success": 1
+      },
+      "failures": [
+        {
+          "settings": {
+            "J1": 0,
+            "J2": 1
+          },
+          "reason": "dead-end",
+          "at": "end"
+        },
+        {
+          "settings": {
+            "J1": 1,
+            "J2": 1
+          },
+          "reason": "blocked",
+          "at": "works"
+        },
+        {
+          "settings": {
+            "J1": 0,
+            "J2": 0
+          },
+          "reason": "dead-end",
+          "at": "end"
+        }
+      ],
+      "difficulty": "Two independent switches in sequence. The first selects continuation, the second distinguishes the station branch from works."
+    },
+    {
+      "id": "L03",
+      "name": "Scenic Route",
+      "switches": 1,
+      "independentControls": 1,
+      "settingsChecked": 2,
+      "solutionCount": 1,
+      "canonical": {
+        "J1": 0
+      },
+      "route": [
+        "start",
+        "approach",
+        "J1",
+        "rise",
+        "bend1",
+        "ridge",
+        "bend2",
+        "east1",
+        "east2",
+        "station"
+      ],
+      "routeLength": 10,
+      "outcomes": {
+        "blocked": 1,
+        "success": 1
+      },
+      "failures": [
+        {
+          "settings": {
+            "J1": 1
+          },
+          "reason": "blocked",
+          "at": "works"
+        }
+      ],
+      "difficulty": "A visibly blocked shortcut invites inspection of a long route. Four curves establish continuous, inspectable port geometry."
+    }
+  ]
+}
