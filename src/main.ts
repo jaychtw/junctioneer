@@ -157,12 +157,14 @@ function render() {
   const result = session.phase === "result" && session.run;
   if (result) {
     const keys = reasonKeys[result.reason];
+    el("outcome").dataset.objectives = String(result.objectives);
     el("outcome").className =
       `outcome ${result.reason === "success" ? "won" : ""}`;
     el("outcome").innerHTML =
       `<span class="outcome-icon" aria-hidden="true">${result.reason === "success" ? "✓" : "↳"}</span><h3>${t(keys[0])}</h3><p>${t(keys[1])}</p>`;
   } else {
     el("outcome").innerHTML = "";
+    delete el("outcome").dataset.objectives;
     el("outcome").className = "";
   }
   el("stage-actions").innerHTML =
@@ -291,8 +293,9 @@ app.addEventListener("click", (event) => {
       render();
       el("announcer").textContent = t("statusRunning");
       scene?.play(run, reduced(), () => {
-        session.finish();
-        if (run.reason === "success") {
+        const completed = session.finish();
+        if (!completed) return;
+        if (completed.reason === "success") {
           save = complete(save, session.level.id);
           persist();
         }

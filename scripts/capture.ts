@@ -11,7 +11,7 @@ import { createHash } from "node:crypto";
 import { existsSync } from "node:fs";
 import { spawn } from "node:child_process";
 const base = process.env.CAPTURE_BASE_URL || "http://127.0.0.1:4173";
-const dir = "docs/evidence";
+const dir = process.env.CAPTURE_OUTPUT_DIR ?? "docs/production-evidence";
 await mkdir(dir, { recursive: true });
 const browser = await chromium.launch({
   executablePath:

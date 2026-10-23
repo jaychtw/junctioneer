@@ -13,3 +13,9 @@
 ## Hosted QA portability follow-up
 
 The original five-second full-animation test deadline failed on hosted software WebGL. Main now permits 20 seconds for that single assertion; no assertion was disabled, and the unchanged game must still complete the journey without skipping and report success. The original test file and all original evidence remain available in the preserved checkpoint tag.
+
+## 2026-10-23 — visual direction approved, Skip Journey correction required
+
+The creative director approved the existing miniature railway direction, particularly the locomotive's dimensional rendering. Production may continue after the shared Skip Journey defect is corrected, tested across all three POC levels, and verified in the redeployed build. No new visual approval is required to continue this approved direction. Final production art acceptance remains separate.
+
+The POC checkpoint and its original evidence remain preserved under `poc-visual-checkpoint-01`. Production captures will be written under a separate directory, never over the original review evidence.

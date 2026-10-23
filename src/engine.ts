@@ -289,8 +289,10 @@ export class Session {
     this.phase = "running";
     return (this.run = simulate(this.level, this.settings));
   }
-  finish(): void {
-    if (this.phase === "running") this.phase = "result";
+  finish(): Run | null {
+    if (this.phase !== "running" || !this.run) return null;
+    this.phase = "result";
+    return this.run;
   }
   retry(): void {
     if (this.phase !== "running") {

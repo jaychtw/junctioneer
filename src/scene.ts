@@ -748,33 +748,52 @@ export class Diorama {
       total,
     };
     this.speed = 1;
+    this.renderer.domElement.dataset.journeyProgress = "0";
+    delete this.renderer.domElement.dataset.terminalReason;
   }
   skip() {
-    if (this.animation) {
-      this.animation.elapsed = this.animation.duration;
-      this.animate(0);
-    }
+    this.completeAnimation();
+  }
+  private place(
+    path: NonNullable<Diorama["animation"]>["paths"][number],
+    t: number,
+  ) {
+    this.train.position.copy(path.curve.getPointAt(t).add(path.offset));
+    const tangent = path.curve.getTangentAt(t);
+    this.train.rotation.y = Math.atan2(tangent.x, tangent.z);
+  }
+  private completeAnimation() {
+    const animation = this.animation;
+    if (!animation) return;
+    // Dispatch already ran the authoritative simulator to its terminal result.
+    // Resolve presentation directly: subtraction of accumulated curve lengths
+    // can miss the last path by a floating-point epsilon, and there may be no
+    // next RAF or resize after skipping to paint the final position.
+    this.animation = null;
+    this.place(animation.paths[animation.paths.length - 1], 1);
+    this.renderer.domElement.dataset.journeyProgress = "1";
+    this.renderer.domElement.dataset.terminalReason = animation.run.reason;
+    this.render();
+    animation.done();
   }
   private animate(dt: number) {
     const a = this.animation;
     if (!a) return;
     a.elapsed += dt * this.speed;
-    let distance = Math.min(1, a.elapsed / a.duration) * a.total;
+    if (a.elapsed >= a.duration) {
+      this.completeAnimation();
+      return;
+    }
+    const progress = Math.max(0, a.elapsed / a.duration);
+    this.renderer.domElement.dataset.journeyProgress = String(progress);
+    let distance = progress * a.total;
     for (const path of a.paths) {
       const len = path.length + (path.dwell ? 0.4 : 0);
       if (distance <= len) {
-        const t = Math.min(1, distance / Math.max(0.001, path.length));
-        const pos = path.curve.getPointAt(t).add(path.offset),
-          tan = path.curve.getTangentAt(t);
-        this.train.position.copy(pos);
-        this.train.rotation.y = Math.atan2(tan.x, tan.z);
+        this.place(path, Math.min(1, distance / Math.max(0.001, path.length)));
         break;
       }
       distance -= len;
-    }
-    if (a.elapsed >= a.duration) {
-      this.animation = null;
-      a.done();
     }
   }
   changeView(action: "in" | "out" | "left" | "right" | "up" | "down" | "home") {
@@ -833,6 +852,10 @@ export class Diorama {
   private render() {
     if (this.active && !this.disposed) {
       this.renderer.render(this.scene, this.camera);
+      if (this.train) {
+        this.renderer.domElement.dataset.trainX = String(this.train.position.x);
+        this.renderer.domElement.dataset.trainZ = String(this.train.position.z);
+      }
       this.renderer.domElement.dataset.renderCalls = String(
         this.renderer.info.render.calls,
       );
