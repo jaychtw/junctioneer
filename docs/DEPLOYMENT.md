@@ -20,7 +20,7 @@ GitHub Pages uses **GitHub Actions**, not the retained `gh-pages` static backup.
 
 ## Production milestone
 
-See [production QA](PRODUCTION-QA.md) for full-game local/hosted checks, deployment identity and separate live gameplay evidence. A build alone is never recorded as deployment; a successful deploy alone is never recorded as a live gameplay check.
+**LIVE AND VERIFIED:** source `8bb78b972e8af0bd0f092e9270f4c30aeecfcfe7` passed hosted [QA 39976924448](https://github.com/jaychtw/junctioneer/actions/runs/39976924448) (163 unit / 56 browser), deployed through [39977669754](https://github.com/jaychtw/junctioneer/actions/runs/39977669754), and passed all 14 live browser tests including all-15 progression and all 12 POC Skip cases. A separate public check verified current app bytes, all 57 screenshots, both videos and gallery layouts at all four widths. See [production QA](PRODUCTION-QA.md) and `production-evidence/delivery-summary.json` for exact identities and limitations. Later documentation-only publication retains identical tested application bytes. A build alone is never recorded as deployment; a successful deploy alone is never recorded as a live gameplay check.
 
 ## Reproduction
 

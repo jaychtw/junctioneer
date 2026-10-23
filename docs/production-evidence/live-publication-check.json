@@ -1,0 +1,23 @@
+{
+  "checkedAt": "2026-10-23T15:25:36.267Z",
+  "scope": "Live GitHub Pages gameplay and both galleries",
+  "url": "https://jaychtw.github.io/junctioneer/",
+  "checks": {
+    "appScript": "./assets/index-CWDoCSEu.js",
+    "appScriptSHA256": "2a6efbfd349731d61e15a09ce5776938772c5d05265a223fa9678e0774f578f3",
+    "meaningfulGameplay": "failure/retry/zh-TW success; 15 menu entries",
+    "galleryImages": 57,
+    "imageHashes": "all match preserved originals and current production captures",
+    "videoDurationsSeconds": [
+      66.56,
+      31.32
+    ],
+    "layoutWidths": [
+      320,
+      390,
+      768,
+      1440
+    ],
+    "pageErrors": []
+  }
+}

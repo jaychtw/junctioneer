@@ -1,0 +1,4 @@
+verify	Run npm test	2026-10-23T15:17:09.0614603Z       Tests  163 passed (163)
+verify	Use runner Chrome	2026-10-23T15:17:11.2049761Z Google Chrome 155.0.8059.39
+verify	Run npm run test:e2e	2026-10-23T15:22:03.9671615Z   56 passed (4.9m)
+verify	Run npm run test:e2e	2026-10-23T15:22:03.9692547Z ##[notice]  56 passed (4.9m)

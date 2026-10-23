@@ -16,7 +16,7 @@ A browser reproduction disabled future animation and resize callbacks after disp
 
 - Unit: all three POC levels, winning and incorrect configurations, early and halfway through playback; exact terminal pose and draw-before-commit ordering; idempotent completion; equality with natural completion; ordered intermediate objectives; floating-point endpoint protection.
 - Browser: all three POC levels × success/failure × early/midway = 12 cases. After reaching the chosen frame, the tests deliberately suppress future RAF and resize callbacks, then assert real WebGL drawing, the exact terminal train position, correct result, objective count and persistence. This catches the original rendering defect even if a layout resize would otherwise hide it.
-- Existing Level 2 natural completion, speed-up, bilingual input, retry and persistence checks remain in the full browser suite.
+- Level 2 bilingual input, retained choices, persistence and reduced-motion natural completion remain covered. Shared animated natural completion and speed-up are also exercised in the browser suite.
 
 Local unit suite: **72 passed**. Local browser suite: **32 passed**, including all 12 frame-independent Skip cases. Build and original-evidence hash validation passed. Hosted/live verification will be recorded after deployment.
 
@@ -36,3 +36,6 @@ Hosted setup correction: the dependency-install step on `ubuntu-latest` stalled.
 ## Full-game continuation
 
 The unit completion harness now covers all 15 levels × success/failure × early/midway (60 cases), with additional lifecycle/geometry assertions. The original 12 browser regressions remain active. Interrupted curved arrivals now follow the actual displayed rail; the L03 failure endpoint is derived from its port vectors rather than the off-rail cell centre. Level 2's straight terminal geometry and results remain unchanged. See [production QA](PRODUCTION-QA.md) for current counts and new deployment evidence; the fixed POC evidence above remains historical and unchanged.
+
+
+Full-game source `8bb78b9` passed **163 unit / 56 browser tests** locally and on hosted QA, then **all 12 frame-frozen Skip regressions** again on its actual public deployment (within 14 passing live tests). Level 2 remains correct in early/midway winning and incorrect configurations. Current reports and evidence are linked from [production QA](PRODUCTION-QA.md).

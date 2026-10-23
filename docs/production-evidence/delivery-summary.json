@@ -1,0 +1,69 @@
+{
+  "recordedAt": "2026-10-23T15:26:22.794674+00:00",
+  "sourceCommit": "8bb78b972e8af0bd0f092e9270f4c30aeecfcfe7",
+  "ugdsVersion": "v1.0.0",
+  "ugdsCommit": "d5c6696efdd6efc028118600466db44aecae0c9b",
+  "preservedCheckpoints": [
+    "poc-visual-checkpoint-01",
+    "poc-skip-fixed-01"
+  ],
+  "originalEvidenceHashesVerified": true,
+  "levels": 15,
+  "reachableSettingsChecked": 66,
+  "unitTests": 163,
+  "localBrowserStats": {
+    "startTime": "2026-10-23T15:17:14.315Z",
+    "duration": 293196.054,
+    "expected": 56,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "hostedQA": {
+    "url": "https://github.com/jaychtw/junctioneer/actions/runs/39976924448",
+    "conclusion": "success",
+    "unitTests": 163,
+    "browserTests": 56
+  },
+  "deployment": {
+    "url": "https://github.com/jaychtw/junctioneer/actions/runs/39977669754",
+    "conclusion": "success"
+  },
+  "liveBrowserStats": {
+    "startTime": "2026-10-23T15:23:52.087Z",
+    "duration": 94635.23100000001,
+    "expected": 14,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "livePublication": {
+    "checkedAt": "2026-10-23T15:25:36.267Z",
+    "scope": "Live GitHub Pages gameplay and both galleries",
+    "url": "https://jaychtw.github.io/junctioneer/",
+    "checks": {
+      "appScript": "./assets/index-CWDoCSEu.js",
+      "appScriptSHA256": "2a6efbfd349731d61e15a09ce5776938772c5d05265a223fa9678e0774f578f3",
+      "meaningfulGameplay": "failure/retry/zh-TW success; 15 menu entries",
+      "galleryImages": 57,
+      "imageHashes": "all match preserved originals and current production captures",
+      "videoDurationsSeconds": [
+        66.56,
+        31.32
+      ],
+      "layoutWidths": [
+        320,
+        390,
+        768,
+        1440
+      ],
+      "pageErrors": []
+    }
+  },
+  "limits": [
+    "Physical devices/GPU performance not verified",
+    "Safari and Firefox not verified",
+    "Independent first-time enjoyment and screen-reader testing not performed",
+    "Final human production-art acceptance remains separate from approved direction"
+  ]
+}
