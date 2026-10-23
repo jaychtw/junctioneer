@@ -85,7 +85,11 @@ test("full animated path completes without skip and speed-up works", async ({
   await page.locator("#dispatch").click();
   await page.locator("#speed").click();
   await expect(page.locator("#speed")).toHaveText("Speed · 2×");
-  await expect(page.locator("#outcome h3")).toHaveText("Right on track.");
+  // Hosted software WebGL is slower than the local machine. Still require
+  // a bounded, unskipped animated journey and the exact winning outcome.
+  await expect(page.locator("#outcome h3")).toHaveText("Right on track.", {
+    timeout: 20000,
+  });
 });
 test("keyboard gameplay, focus recovery and help dialog", async ({ page }) => {
   await ready(page);

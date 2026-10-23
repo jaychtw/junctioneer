@@ -9,3 +9,7 @@
 - Visual direction: **pending review**. No visual production scaling is authorized yet.
 - Preservation: original POC source, all 14 screenshots, recording and test evidence retained at commit `95711eaeaf4d43b5cf8e19439f73e5eea629b274` and tag `poc-visual-checkpoint-01`. Evidence hashes remain unchanged.
 - Publication: the user explicitly authorized pushing and deploying this POC to the existing `jaychtw/junctioneer` repository to make review accessible. This does not constitute creative approval or full v1.0 acceptance.
+
+## Hosted QA portability follow-up
+
+The original five-second full-animation test deadline failed on hosted software WebGL. Main now permits 20 seconds for that single assertion; no assertion was disabled, and the unchanged game must still complete the journey without skipping and report success. The original test file and all original evidence remain available in the preserved checkpoint tag.

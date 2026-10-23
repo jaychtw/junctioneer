@@ -3,6 +3,7 @@ import { readFile, writeFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
 const origin = process.env.REVIEW_CHECK_ORIGIN ?? "http://127.0.0.1:4180";
 const base = `${origin}/junctioneer/`;
+const local = ["127.0.0.1", "localhost"].includes(new URL(origin).hostname);
 const browser = await chromium.launch({
   executablePath: "/usr/bin/chromium",
   args: [
@@ -65,12 +66,16 @@ for (const width of [320, 390, 768, 1440]) {
 expect(errors).toEqual([]);
 await browser.close();
 await writeFile(
-  "docs/review-publication-check.json",
+  local
+    ? "docs/review-publication-check.json"
+    : "docs/live-publication-check.json",
   JSON.stringify(
     {
       checkedAt: new Date().toISOString(),
-      scope:
-        "Local production deployment artifact mounted under /junctioneer/; not a live GitHub Pages check",
+      scope: local
+        ? "Local production deployment artifact mounted under /junctioneer/; not a live GitHub Pages check"
+        : "Live GitHub Pages production gameplay and gallery check",
+      url: base,
       checks: {
         meaningfulGameplay: "failure/retry/zh-TW success",
         galleryImages: 14,

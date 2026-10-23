@@ -6,7 +6,7 @@ The user authorized source push and POC deployment to make the visual review acc
 
 - Original POC: `95711eaeaf4d43b5cf8e19439f73e5eea629b274`.
 - Immutable review tag pushed: [`poc-visual-checkpoint-01`](https://github.com/jaychtw/junctioneer/tree/poc-visual-checkpoint-01).
-- All original engine, level, UI, visual, test, screenshot, recording and QA-report files are preserved. Packaging verifies their hashes before creating a review site.
+- All original engine, level, UI, visual, test, screenshot, recording and QA-report files are preserved in the checkpoint tag. Game code, visuals and original captured evidence remain unchanged on main. Packaging verifies their hashes before creating a review site.
 - Original source was pushed successfully to `main`.
 - Generated static POC and gallery were also pushed to `gh-pages` at `707b0ba0a5a61e540580d21a1c8918b27bc62c2c`. The repository's configured Pages mode is **GitHub Actions**, so this branch alone does not deploy the configured site.
 
@@ -27,3 +27,7 @@ Expected gallery address: `https://jaychtw.github.io/junctioneer/review/`.
 - Detailed result: [review-publication-check.json](review-publication-check.json).
 
 The historical QA report is preserved unchanged. Its no-push/no-deployment and pending gameplay-decision statements describe the original checkpoint, and are superseded by this record and the decision log as new milestones complete.
+
+## Hosted QA diagnosis
+
+Initial hosted run [39962260320](https://github.com/jaychtw/junctioneer/actions/runs/39962260320): unit checks, solver checks and build passed; browser QA had 19 passes and one failure. The full-animation success assertion timed out at its default five seconds while the train was still moving on the hosted software renderer. The assertion now permits a bounded 20 seconds for that unskipped journey, retaining the exact success outcome check. No game timing, mechanics, visual assets or original test evidence were changed. Hosted rerun and publication are being verified.
