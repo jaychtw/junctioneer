@@ -30,13 +30,23 @@ const reports = levels.map((level) => {
         settings,
         reason: run.reason,
         at: run.steps.at(-1)?.node,
+        objectives: run.objectives,
+        route: run.steps.map((s) => s.node),
       });
   }
   if (!failures.length)
     throw new Error(`${level.id}: no meaningful failure settings`);
   return {
     id: level.id,
-    name: level.name[0],
+    name: level.name,
+    chapter: level.chapter,
+    size: level.size,
+    topology: level.rails,
+    start: level.start,
+    stops: level.stops,
+    destination: level.destination,
+    groups: level.groups,
+    initial: initialSettings(level),
     switches: Object.keys(level.canonical).length,
     independentControls: cs.length,
     settingsChecked: 2 ** cs.length,
@@ -53,7 +63,7 @@ console.log(
   JSON.stringify(
     {
       scope:
-        "Visual-gate POC: three representative levels. Levels 4–15 pending approval and production.",
+        "Production authoring: 15 handcrafted levels; exhaustive reachable group settings with the production simulator.",
       levels: reports,
     },
     null,

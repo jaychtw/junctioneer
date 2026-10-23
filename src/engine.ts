@@ -24,6 +24,7 @@ export interface Level {
   start: { node: string; exit: Port };
   stops: string[];
   destination: string;
+  stationNames?: Record<string, [string, string]>;
   groups: string[][];
   canonical: Settings;
 }

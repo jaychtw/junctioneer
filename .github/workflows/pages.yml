@@ -1,4 +1,4 @@
-name: Publish POC review
+name: Publish Junctioneer
 on:
   workflow_run:
     workflows: [Junctioneer QA]
@@ -43,6 +43,6 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Deploy preserved POC and review gallery
+      - name: Deploy game and preserved review gallery
         id: deployment
         uses: actions/deploy-pages@v4

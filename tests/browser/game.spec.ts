@@ -1,7 +1,7 @@
 import { test, expect, type Page } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 const ready = async (page: Page) => {
-  await page.goto("/");
+  await page.goto("./");
   await expect(page.locator("#map-J1")).toBeVisible();
   await expect(page.locator("#world canvas")).toBeVisible();
 };
@@ -36,12 +36,25 @@ test("desktop real input: failure, retained retry, selected route, win, replay, 
   );
   expect(saved.completed).toEqual(["L01"]);
   await page.reload();
-  await expect(page.locator("#preview-count")).toContainText("1 / 3");
+  await expect(page.locator("#preview-count")).toContainText("1 / 15");
   expect(errors).toEqual([]);
 });
 test("live bilingual state, motion preference and complete second/third authored journeys", async ({
   page,
 }) => {
+  await page.addInitScript(
+    () =>
+      !localStorage.getItem("junctioneer.v1") &&
+      localStorage.setItem(
+        "junctioneer.v1",
+        JSON.stringify({
+          version: 1,
+          completed: ["L01"],
+          language: "en",
+          reducedMotion: false,
+        }),
+      ),
+  );
   await ready(page);
   await page.locator('#level-cards [data-level="1"]').click();
   await page.locator("#route-J1").click();
@@ -63,7 +76,7 @@ test("live bilingual state, motion preference and complete second/third authored
   await expect(page.locator("#outcome h3")).toHaveText("Right on track.");
   await page.reload();
   await expect(page.locator("#motion")).toHaveAttribute("aria-pressed", "true");
-  await expect(page.locator("#preview-count")).toContainText("2 / 3");
+  await expect(page.locator("#preview-count")).toContainText("3 / 15");
 });
 test("mid-dispatch language toggle preserves locked state and input snapshot", async ({
   page,
@@ -111,8 +124,10 @@ test("keyboard gameplay, focus recovery and help dialog", async ({ page }) => {
 test("corrupt save remains untouched and session remains playable", async ({
   page,
 }) => {
-  await page.addInitScript(() =>
-    localStorage.setItem("junctioneer.v1", "{corrupt"),
+  await page.addInitScript(
+    () =>
+      !localStorage.getItem("junctioneer.v1") &&
+      localStorage.setItem("junctioneer.v1", "{corrupt"),
   );
   await ready(page);
   await expect(page.locator("#storage-warning")).toBeVisible();
@@ -225,6 +240,19 @@ test("mobile two-switch targets stay separate and complete via map taps", async 
     hasTouch: true,
   });
   const page = await context.newPage();
+  await page.addInitScript(
+    () =>
+      !localStorage.getItem("junctioneer.v1") &&
+      localStorage.setItem(
+        "junctioneer.v1",
+        JSON.stringify({
+          version: 1,
+          completed: ["L01"],
+          language: "en",
+          reducedMotion: false,
+        }),
+      ),
+  );
   await ready(page);
   await page.locator('#level-cards [data-level="1"]').tap();
   const a = await page.locator("#map-J1").boundingBox(),
@@ -270,7 +298,7 @@ test("unavailable WebGL gives a localized explanation without a broken dispatch 
     HTMLCanvasElement.prototype.getContext = (() =>
       null) as typeof HTMLCanvasElement.prototype.getContext;
   });
-  await page.goto("/");
+  await page.goto("./");
   await expect(page.locator(".render-error")).toContainText(
     "3D rendering is unavailable",
   );

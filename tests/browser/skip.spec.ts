@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { levels } from "../../src/levels";
-import { simulate, initialSettings } from "../../src/engine";
+import { simulate, initialSettings, delta } from "../../src/engine";
 
 test.beforeEach(async ({ page }) => {
   await page.addInitScript(() => {
@@ -41,6 +41,19 @@ for (const level of levels.slice(0, 3))
       test(`${level.id} ${winning ? "success" : "failure"} ${timing}: skip finishes, paints, persists without another frame`, async ({
         page,
       }) => {
+        await page.addInitScript(
+          (completed) =>
+            localStorage.setItem(
+              "junctioneer.v1",
+              JSON.stringify({
+                version: 1,
+                completed,
+                language: "en",
+                reducedMotion: false,
+              }),
+            ),
+          levels.slice(0, level.number - 1).map((l) => l.id),
+        );
         await page.goto("./");
         await page
           .locator(`#level-cards [data-level="${level.number - 1}"]`)
@@ -85,12 +98,24 @@ for (const level of levels.slice(0, 3))
         expect(after).toBeGreaterThan(before);
         const last = level.rails.find((r) => r.id === run.steps.at(-1)!.node)!,
           offset = (level.size - 1) / 2;
+        // Interrupted curved arrivals stop on the rendered quadratic rail,
+        // whose midpoint is one quarter of the two face-point vectors.
+        const arrivalOffset =
+          last.ports.length === 2
+            ? last.ports.reduce(
+                (sum, p) => [
+                  sum[0] + delta[p][0] / 8,
+                  sum[1] + delta[p][1] / 8,
+                ],
+                [0, 0],
+              )
+            : [0, 0];
         expect(Number(await canvas.getAttribute("data-train-x"))).toBeCloseTo(
-          last.x - offset,
+          last.x - offset + arrivalOffset[0],
           10,
         );
         expect(Number(await canvas.getAttribute("data-train-z"))).toBeCloseTo(
-          last.z - offset,
+          last.z - offset + arrivalOffset[1],
           10,
         );
         await expect(canvas).toHaveAttribute("data-journey-progress", "1");

@@ -1,3 +1,4 @@
+import { productionLevels } from "./levels-production";
 import type { Level, Rail, Port } from "./engine";
 const rail = (
   id: string,
@@ -118,4 +119,5 @@ export const levels: Level[] = [
       terminal("end", 3, 3, "N", "dead"),
     ],
   },
+  ...productionLevels,
 ];

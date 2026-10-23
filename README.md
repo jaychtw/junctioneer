@@ -1,60 +1,51 @@
 # Junctioneer
 
-A cheerful, untimed railway-routing puzzle for English and Traditional Chinese speakers. TypeScript + Three.js, static deployable, with locally bundled code and original runtime-built 3D assets. No accounts, telemetry, audio, or runtime network services.
+Fifteen cheerful, untimed miniature railway puzzles in English and Traditional Chinese. TypeScript + Three.js, original runtime-built 3D art, and static hosting. No accounts, telemetry, audio or runtime services.
 
-**Current milestone: functional and visual POC, awaiting explicit creative-director visual approval. This is not the completed v1.0 release.** Three playable authored puzzles are implemented. The full assignment remains 15 levels across three chapters. See [QA evidence](docs/QA-REPORT.md), [visual review](docs/VISUAL-REVIEW.md), and the supplied [handoff](docs/handoff/CODEX-HANDOFF.md).
+**Play:** https://jaychtw.github.io/junctioneer/ · **Screenshots and recordings:** https://jaychtw.github.io/junctioneer/review/
 
-## Develop
+All 15 authored levels, three chapters, ordered stops, linked switches, progression and local saves are implemented. The original miniature art direction is approved; remaining independent human/device acceptance limits are recorded in [production QA](docs/PRODUCTION-QA.md). See the [Skip Journey fix](docs/SKIP-JOURNEY-FIX.md), [checkpoint decisions](docs/DECISIONS.md) and supplied [handoff](docs/handoff/CODEX-HANDOFF.md).
 
-Use the existing checkout; cloud tasks are already isolated. Do not create a worktree unless explicitly requested.
+## Develop and verify
 
-Node 24 (tested: 24.19.0), npm 11 (tested: 11.9.0):
+Use this checkout; do not create a worktree unless requested. Node 24.19.0 / npm 11.9.0:
 
 ```sh
 npm ci --cache /workspace/shared/npm-cache
 npm run dev -- --port 5173 --strictPort
-```
-
-The absolute cache path is for the cloud environment. On a normal local machine, use `npm ci` and your usual writable npm cache instead. No environment variables or credentials are required to play or test the game.
-
-## Verify
-
-```sh
 npm test
 npm run validate:levels
 npm run build
 npm run test:e2e
 ```
 
-Browser tests use `/usr/bin/chromium` when present; set `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH` for another system Chromium. If neither is present, install the Playwright-managed browser with `npx playwright install --with-deps chromium`. The cloud machine already has Chromium and needs no browser download. Software WebGL is enabled for headless validation. This does not establish physical-device GPU performance.
+The absolute cache path is for the cloud environment. Elsewhere use your normal npm cache. No game credentials or environment variables are required.
 
-The capture script also uses the installed system FFmpeg at `/usr/bin/ffmpeg` to encode Chrome DevTools screencast frames with their original timing. It does not require a separate Playwright FFmpeg download.
+Browser tests use installed `/usr/bin/chromium`, or `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH`; otherwise install Playwright Chromium. Hosted QA uses the supported runner's preinstalled Chrome. Headless software WebGL does not establish physical GPU performance. `JUNCTIONEER_BASE_URL` runs the same browser tests against a deployed URL.
 
-Regenerate actual production-build visual evidence:
+Capture the actual production build (system FFmpeg is needed):
 
 ```sh
 npm run build
 npm run preview -- --port 4173 --strictPort
-# In a second terminal:
+# In another terminal:
 npm run capture
+npm run build:review
 ```
 
-`CAPTURE_BASE_URL` can select another locally served build. Captures assert meaningful gameplay outcomes and write source/artifact SHA-256 hashes. Do not describe an unexecuted capture as verified.
+Captures write `docs/production-evidence`, assert real outcomes and record source/artifact hashes. `CAPTURE_BASE_URL` and `CAPTURE_OUTPUT_DIR` can select a different build/output. Original `docs/evidence` is immutable. Review builds verify original and production capture hashes, then bundle the galleries for Pages.
 
-## Implementation map
+## Source map
 
-- `src/engine.ts`: explicit cardinal ports, graph validation, deterministic simulator, linked-group settings, exhaustive solver, planning/dispatch lifecycle.
-- `src/levels.ts`: handcrafted topologies, localized metadata, explicit initial/canonical settings and difficulty rationale.
-- `src/scene.ts`: original 3D assemblies, graph-derived rails and curves, dimensional lighting, batched static geometry, train traversal, zoom/pan.
-- `src/i18n.ts`: centralized English / zh-TW copy and accessibility text.
-- `src/main.ts`, `src/style.css`: live state-preserving localization, mouse/keyboard/touch controls, responsive UI, result/retry flows.
-- `src/storage.ts`: validated local progress and preferences; invalid storage is preserved and session-only operation continues.
-- `tests/`: engine, authoring and storage unit tests; Chromium gameplay, responsive, input and axe audits.
+- `src/engine.ts`: explicit ports, graph validation, deterministic routing, objective-aware loops, atomic linked controls, exhaustive solver and session lifecycle.
+- `src/levels.ts`, `src/levels-production.ts`, `src/authoring.ts`: 15 hand-authored layouts, bilingual metadata and expanded reciprocal graphs.
+- `src/scene.ts`: original 3D assemblies, graph-derived rail/train curves, lighting, static batching, station dwell, frame-independent completion, zoom/pan.
+- `src/main.ts`, `src/style.css`, `src/i18n.ts`: bilingual responsive accessible gameplay, chapter menu and progression.
+- `src/storage.ts`: validated device-local completion/preferences, graceful storage failure.
+- `tests/`: simulation, geometry, save, Skip Journey, real-input browser gameplay, all-level progression, responsive/touch/keyboard/axe coverage.
 
-## Mandatory continuation gates
+## Standards and preserved checkpoints
 
-Read the project handoff before extending this checkpoint. UGDS is private and is deliberately not copied into this repository. Verify access to tag `v1.0.0` in `jaychtw/game-development-standards`, resolving to `d5c6696efdd6efc028118600466db44aecae0c9b`, and fully read it before implementation. See the recorded preflight in the QA report.
+Before further implementation, verify/read private `jaychtw/game-development-standards` tag `v1.0.0`, exact SHA `d5c6696efdd6efc028118600466db44aecae0c9b`. Private UGDS content must remain outside this public repository.
 
-Do not scale art production before explicit creative-director approval of the in-engine visual POC. The user has approved objective-aware complete-state loop detection and valid track revisits; see [checkpoint decisions](docs/DECISIONS.md). This supersedes the historical QA report’s pending interpretation discussion. After approval, implement and validate the remaining levels, chapter progression, full-content teaching and final production art. Human puzzle enjoyment, final art acceptance, physical devices, screen readers, and independent first-time players remain separate checks.
-
-A CI workflow is included. The user has authorized publishing the preserved POC for review. See [deployment status and setup](docs/DEPLOYMENT.md) for the actual push, deployment and live-verification status. The original QA report remains unchanged as historical evidence.
+`poc-visual-checkpoint-01` preserves the original source and unchanged evidence. `poc-skip-fixed-01` preserves the fixed POC before full production. Historical POC reports are deliberately unchanged; current decisions and production QA supersede their pending statuses. Public publishing/deployment and continuation after the approved visual direction are authorized by the user.

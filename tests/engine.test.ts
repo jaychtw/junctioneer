@@ -53,6 +53,7 @@ describe("authored puzzles — exhaustive production-simulator proof", () => {
       for (let mask = 0; mask < 2 ** ids.length; mask++) {
         const s: Settings = {};
         ids.forEach((id, i) => (s[id] = ((mask >> i) & 1) as 0 | 1));
+        if (!settingsValid(l, s)) continue;
         const run = simulate(l, s);
         if (run.reason !== "success") wrongs.push(run.reason);
         expect(run.reason).not.toBe("step-limit");
@@ -60,7 +61,14 @@ describe("authored puzzles — exhaustive production-simulator proof", () => {
       expect(wrongs.length).toBeGreaterThan(0);
       expect(
         wrongs.every((r) =>
-          ["blocked", "dead-end", "disconnected"].includes(r),
+          [
+            "blocked",
+            "dead-end",
+            "disconnected",
+            "loop",
+            "wrong-order",
+            "early-terminal",
+          ].includes(r),
         ),
       ).toBe(true);
     });

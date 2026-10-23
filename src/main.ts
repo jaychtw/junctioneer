@@ -2,7 +2,14 @@ import "./style.css";
 import { levels } from "./levels";
 import { Session, validate, type Port, type Reason } from "./engine";
 import { copy, type Key } from "./i18n";
-import { complete, defaults, readSave, writeSave, type Save } from "./storage";
+import {
+  complete,
+  defaults,
+  readSave,
+  writeSave,
+  unlockedThrough,
+  type Save,
+} from "./storage";
 import { Diorama } from "./scene";
 const icons = {
   train:
@@ -32,6 +39,7 @@ let index = 0,
   session = new Session(levels[0]),
   scene: Diorama | null = null,
   speed = 1;
+let objectiveProgress = 0;
 const t = (key: Key): string => copy[save.language][key];
 const direction = (port: Port) =>
   t(({ N: "north", E: "east", S: "south", W: "west" } as const)[port]);
@@ -47,7 +55,7 @@ const app = document.querySelector<HTMLDivElement>("#app")!;
 app.innerHTML = `
 <header class="site-header"><a class="brand" href="./">${icons.train}<span>Junctioneer<span class="brand-sub" data-i="tagline"></span></span></a><div class="header-tools"><span class="workshop" data-i="workshop"></span><button id="language" class="text-button lang-button">繁中</button><button id="help" class="icon-button" data-label="help">?</button><button id="motion" class="icon-button" data-label="motion">${icons.sun}</button></div></header>
 <main>
- <div class="page-heading"><div><p class="eyebrow" data-i="chapter"></p><h1 id="level-title"></h1></div><button id="levels" class="outline-button">${icons.grid}<span data-i="levels"></span></button></div>
+ <div class="page-heading"><div><p class="eyebrow" id="chapter-heading"></p><h1 id="level-title"></h1></div><button id="levels" class="outline-button">${icons.grid}<span data-i="levels"></span></button></div>
  <div class="game-layout">
   <section class="scene-card" aria-labelledby="level-title"><div class="scene-top"><span class="phase"><span class="status-dot"></span><span id="phase"></span></span><span class="scene-meta" data-i="engineStatus"></span></div>
     <div id="world"><div id="switches"></div><div id="landmarks" aria-hidden="true"></div></div>
@@ -55,15 +63,15 @@ app.innerHTML = `
   </section>
   <aside class="planning-panel"><div class="panel-intro"><p class="eyebrow" data-i="ready"></p><h2 id="panel-title" data-i="intro"></h2><p id="hint"></p></div>
     <div class="journey-card"><p class="eyebrow" data-i="goal"></p><div class="stop"><span class="stop-dot"></span><div><span class="small-label" data-i="from"></span><strong data-i="start"></strong></div></div><div class="stop"><span class="stop-dot finish-dot"></span><div><span class="small-label" data-i="to"></span><strong data-i="destination"></strong></div>${icons.train}</div></div>
-    <div id="route-controls"></div>
+    <div id="ordered-stops"></div><div id="route-controls"></div>
     <div id="outcome" role="status" aria-live="polite" aria-atomic="true"></div>
     <div id="actions"></div><p class="reassurance" data-i="note"></p>
   </aside>
  </div>
  <div class="below-board"><p data-i="touchHint"></p><details><summary data-i="routeDescription"></summary><p id="route-description"></p></details></div>
- <div class="journey-strip"><div class="strip-heading"><p class="eyebrow" data-i="previewTitle"></p><span id="preview-count"></span></div><div id="level-cards"></div></div>
+ <div class="journey-strip"><div class="strip-heading"><p class="eyebrow" id="strip-title"></p><span id="preview-count"></span></div><div id="level-cards"></div></div>
  <p id="storage-warning" role="status"></p>
-</main><footer><span>JUNCTIONEER</span><span data-i="previewFooter"></span><span>01 — 03 / 15</span></footer>
+</main><footer><span>JUNCTIONEER</span><span data-i="previewFooter"></span><span>01 — 15</span></footer>
 <dialog id="menu" aria-labelledby="menu-title"><button class="dialog-close" id="menu-close" data-label="close">×</button><p class="eyebrow" data-i="workshop"></p><h2 id="menu-title" data-i="previewTitle"></h2><p data-i="previewBody"></p><div id="menu-levels"></div></dialog>
 <dialog id="instructions" aria-labelledby="help-title"><button class="dialog-close" id="help-close" data-label="close">×</button><p class="eyebrow" data-i="help"></p><h2 id="help-title" data-i="helpTitle"></h2>${[1, 2, 3].map((n) => `<h3 data-i="help${n}"></h3><p data-i="help${n}Body"></p>`).join("")}<p class="keyboard-note" data-i="controls"></p></dialog><div id="announcer" class="sr-only" role="status" aria-live="polite"></div>`;
 const el = <T extends HTMLElement = HTMLElement>(id: string) =>
@@ -81,8 +89,30 @@ const reasonKeys: Record<Reason, [Key, Key]> = {
   "early-terminal": ["early", "earlyBody"],
   "step-limit": ["defect", "defectBody"],
 };
+const chapterName = (n: number) => t(`chapter${n}` as Key);
+const localName = (id: string) =>
+  session.level.stationNames?.[id]?.[save.language === "en" ? 0 : 1] ??
+  (id === session.level.destination ? t("destination") : id);
+const groupFor = (id: string) =>
+  session.level.groups.findIndex((g) => g.includes(id));
+const groupLabel = (id: string) =>
+  groupFor(id) < 0
+    ? ""
+    : `${t("linked")} ${String.fromCharCode(65 + groupFor(id))}`;
+function renderObjectives() {
+  el("ordered-stops").innerHTML = session.level.stops.length
+    ? `<p class="eyebrow">${t("stops")}</p><ol class="objective-list">${session.level.stops.map((id, i) => `<li class="${i < objectiveProgress ? "visited" : ""}"><span class="objective-number">${i < objectiveProgress ? "✓" : i + 1}</span><span>${localName(id)}<small>${t(i < objectiveProgress ? "visited" : "pending")}</small></span></li>`).join("")}</ol>`
+    : "";
+}
 function render() {
   const focusId = document.activeElement?.id;
+  for (const id of session.level.stops) {
+    const label = document.querySelector<HTMLElement>(
+      `[data-landmark="${id}"]`,
+    );
+    if (label)
+      label.textContent = `${session.level.stops.indexOf(id) + 1} · ${localName(id)}`;
+  }
   document.documentElement.lang = save.language;
   document.title = `${t("brand")} · ${session.level.name[save.language === "en" ? 0 : 1]}`;
   document
@@ -92,6 +122,12 @@ function render() {
     e.setAttribute("aria-label", t(e.dataset.label as Key));
     e.title = t(e.dataset.label as Key);
   });
+  el("chapter-heading").textContent =
+    `${t("chapterLabel")} ${String(session.level.chapter).padStart(2, "0")} / ${chapterName(session.level.chapter)}`;
+  el("strip-title").textContent = chapterName(session.level.chapter);
+  renderObjectives();
+  document.querySelector<HTMLElement>(".scene-card")!.dataset.phase =
+    session.phase;
   el("level-title").innerHTML =
     `<span class="title-number">${String(session.level.number).padStart(2, "0")}<span> / </span></span>${session.level.name[save.language === "en" ? 0 : 1]}`;
   el("language").textContent = save.language === "en" ? "繁中" : "EN";
@@ -113,11 +149,26 @@ function render() {
   el("hint").textContent = session.level.hint[save.language === "en" ? 0 : 1];
   el("scene-count").textContent =
     `${t("level")} ${String(session.level.number).padStart(2, "0")} / 15`;
-  el("route-description").textContent = t(
-    (["path1", "path2", "path3"] as const)[index],
+  el("route-description").textContent =
+    index < 3
+      ? t((["path1", "path2", "path3"] as const)[index])
+      : session.level.hint[save.language === "en" ? 0 : 1] +
+        " " +
+        session.level.rails
+          .filter((r) => r.kind === "junction")
+          .map(
+            (r) =>
+              `${t("switch")} ${r.id.slice(1)}: ${t("guideStem")} ${direction(r.stem!)}; ${t("guideBranches")} ${r.branches!.map(direction).join(" / ")}. ${groupLabel(r.id)}`,
+          )
+          .join(" ");
+  const scenic = session.level.rails.filter(
+    (r) => r.kind === "station" && !session.level.stops.includes(r.id),
   );
+  if (scenic.length)
+    el("route-description").textContent +=
+      ` ${t("ordinary")}: ${scenic.map((r) => localName(r.id)).join(", ")}.`;
   el("preview-count").textContent =
-    `${save.completed.filter((id) => levels.some((l) => l.id === id)).length} / 3 ${t("completed")}`;
+    `${save.completed.filter((id) => levels.some((l) => l.id === id)).length} / 15 ${t("completed")}`;
   if (rendererFailed) {
     el("world").innerHTML =
       `<div class="render-error"><h2>${t("error")}</h2><p>${t("errorBody")}</p></div>`;
@@ -132,7 +183,7 @@ function render() {
   }
   const switches = session.level.rails.filter((r) => r.kind === "junction");
   el("route-controls").innerHTML =
-    `<p class="eyebrow">${t("choose")}</p>${switches.map((r, i) => `<button id="route-${r.id}" class="route-button" data-switch="${r.id}" ${session.phase !== "planning" ? "disabled" : ""}><span class="switch-number">${i + 1}</span><span><strong>${t("switch")} ${i + 1}</strong><span class="route-value">${t("selected")}: ${direction(r.branches![session.settings[r.id]])}</span></span><span class="change-icon" aria-hidden="true">⇄</span></button>`).join("")}<p class="route-explainer">${t(session.phase === "running" ? "settingsLocked" : "routeHint")}</p>`;
+    `<p class="eyebrow">${t("choose")}</p>${switches.map((r, i) => `<button id="route-${r.id}" class="route-button" data-switch="${r.id}" ${session.phase !== "planning" ? "disabled" : ""}><span class="switch-number">${i + 1}</span><span><strong>${t("switch")} ${i + 1}${groupFor(r.id) < 0 ? "" : `<em class="group-badge">${String.fromCharCode(65 + groupFor(r.id))}</em>`}</strong><span class="route-value">${groupLabel(r.id) ? groupLabel(r.id) + " · " : ""}${t("selected")}: ${direction(r.branches![session.settings[r.id]])}</span></span><span class="change-icon" aria-hidden="true">⇄</span></button>`).join("")}<p class="route-explainer">${t(session.phase === "running" ? "settingsLocked" : "routeHint") + (session.level.groups.length ? " " + t("linkedHint") : "")}</p>`;
   if (session.phase === "planning")
     el("actions").innerHTML =
       button("dispatch", "dispatch", "primary-button", icons.train) +
@@ -184,17 +235,28 @@ function render() {
             icons.arrow,
           )
         : "";
+  if (
+    result &&
+    result.reason === "success" &&
+    save.completed.length === 15 &&
+    index === 14
+  ) {
+    el("outcome").innerHTML =
+      `<span class="outcome-icon" aria-hidden="true">✦</span><h3>${t("finalTitle")}</h3><p>${t("finalBody")}</p>`;
+    el("outcome").classList.add("all-complete");
+  }
   el("storage-warning").textContent = storagePaused ? t("storageWarning") : "";
+  const card = (l: (typeof levels)[number], i: number, menu = false) => {
+    const locked = i > unlockedThrough(save);
+    return `<button class="${menu ? "menu-level" : "level-card"} ${i === index ? "active" : ""}" data-level="${i}" ${locked || session.phase === "running" ? "disabled" : ""} ${i === index ? 'aria-current="step"' : ""}><span class="card-number">${String(l.number).padStart(2, "0")}</span><strong>${l.name[save.language === "en" ? 0 : 1]}</strong><span class="sr-only">${locked ? t("locked") : save.completed.includes(l.id) ? t("completed") : ""}</span><span class="card-state" aria-hidden="true">${save.completed.includes(l.id) ? "✓" : locked ? "○" : "→"}</span></button>`;
+  };
   el("level-cards").innerHTML = levels
-    .map(
-      (l, i) =>
-        `<button class="level-card ${i === index ? "active" : ""}" data-level="${i}" ${session.phase === "running" ? "disabled" : ""} ${i === index ? 'aria-current="step"' : ""}><span class="card-number">${String(l.number).padStart(2, "0")}</span><span><span class="small-label">${t("journeyIndex")} ${String(l.number).padStart(2, "0")}</span><strong>${l.name[save.language === "en" ? 0 : 1]}</strong></span><span class="sr-only">${save.completed.includes(l.id) ? t("completed") : ""}</span><span class="card-state" aria-hidden="true">${save.completed.includes(l.id) ? "✓" : i === index ? "●" : "→"}</span></button>`,
-    )
+    .map((l, i) => (l.chapter === session.level.chapter ? card(l, i) : ""))
     .join("");
-  el("menu-levels").innerHTML = levels
+  el("menu-levels").innerHTML = [1, 2, 3]
     .map(
-      (l, i) =>
-        `<button class="menu-level" data-level="${i}" ${session.phase === "running" ? "disabled" : ""}><span>${String(l.number).padStart(2, "0")}</span><strong>${l.name[save.language === "en" ? 0 : 1]}</strong><span>${save.completed.includes(l.id) ? "✓" : "→"}</span></button>`,
+      (ch) =>
+        `<h3>${t("chapterLabel")} ${ch} · ${chapterName(ch)}</h3>${levels.map((l, i) => (l.chapter === ch ? card(l, i, true) : "")).join("")}`,
     )
     .join("");
   document.querySelector("[data-group]")?.setAttribute("aria-label", t("view"));
@@ -207,25 +269,33 @@ function render() {
       b.disabled = session.phase !== "planning";
       b.setAttribute(
         "aria-label",
-        `${t("switch")} ${i + 1}, ${t("selected")}: ${direction(switches[i].branches![session.settings[switches[i].id]])}. ${t("toggle")}`,
+        `${t("switch")} ${i + 1}${groupFor(switches[i].id) < 0 ? "" : " " + String.fromCharCode(65 + groupFor(switches[i].id))}, ${t("selected")}: ${direction(switches[i].branches![session.settings[switches[i].id]])}. ${groupLabel(switches[i].id)}. ${t("toggle")}`,
       );
     });
   if (focusId && document.activeElement?.id !== focusId)
     document.getElementById(focusId)?.focus({ preventScroll: true });
 }
 function load(i: number) {
+  if (i < 0 || i >= levels.length || i > unlockedThrough(save)) return;
+  objectiveProgress = 0;
   index = i;
   session = new Session(levels[i]);
   speed = 1;
+  objectiveProgress = 0;
   el("switches").innerHTML = session.level.rails
     .filter((r) => r.kind === "junction")
     .map(
       (r, i) =>
-        `<button id="map-${r.id}" class="map-switch" data-switch="${r.id}"><span>${i + 1}</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13V8q0-4 7-5M3 8l7 5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="10" cy="3" r="1.5" fill="currentColor"/></svg></button>`,
+        `<button id="map-${r.id}" class="map-switch" data-switch="${r.id}"><span>${i + 1} ${groupFor(r.id) < 0 ? "" : `<em class="group-badge">${String.fromCharCode(65 + groupFor(r.id))}</em>`}</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 13V8q0-4 7-5M3 8l7 5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="10" cy="3" r="1.5" fill="currentColor"/></svg></button>`,
     )
     .join("");
   el("landmarks").innerHTML =
     `<span class="landmark start-tag" data-landmark="start" data-i="startArrow"></span><span class="landmark station-tag" data-landmark="${session.level.destination}" data-i="stationLabel"></span>`;
+  for (const [n, id] of session.level.stops.entries())
+    el("landmarks").insertAdjacentHTML(
+      "beforeend",
+      `<span class="landmark objective-tag" data-landmark="${id}">${n + 1} · ${localName(id)}</span>`,
+    );
   document.querySelector<HTMLElement>(".pan-tools")!.hidden = true;
   scene?.load(session.level, session.settings);
   render();
@@ -290,6 +360,7 @@ app.addEventListener("click", (event) => {
       const run = session.dispatch();
       if (!run) break;
       speed = 1;
+      objectiveProgress = 0;
       render();
       el("announcer").textContent = t("statusRunning");
       scene?.play(run, reduced(), () => {
@@ -330,6 +401,7 @@ app.addEventListener("click", (event) => {
       break;
     case "stage-retry":
     case "retry":
+      objectiveProgress = 0;
       session.retry();
       scene?.home();
       render();
@@ -342,29 +414,102 @@ app.addEventListener("click", (event) => {
       break;
   }
 });
+const highlightGroup = (event: Event) => {
+  const control =
+    document.activeElement?.closest<HTMLElement>("[data-switch]") ??
+    (event.target as HTMLElement).closest<HTMLElement>("[data-switch]");
+  const group = control
+    ? (session.level.groups.find((g) => g.includes(control.dataset.switch!)) ??
+      [])
+    : [];
+  document
+    .querySelectorAll<HTMLElement>("[data-switch]")
+    .forEach((b) =>
+      b.classList.toggle("linked-preview", group.includes(b.dataset.switch!)),
+    );
+};
+app.addEventListener("focusin", highlightGroup);
+app.addEventListener("pointerover", highlightGroup);
 try {
   scene = new Diorama(el("world"));
+  scene.onProgress = (progress) => {
+    if (objectiveProgress !== progress) {
+      objectiveProgress = progress;
+      renderObjectives();
+    }
+  };
   scene.onProject = (positions) => {
-    const placed: { x: number; y: number }[] = [];
+    const placed: { x: number; y: number; w: number }[] = [];
+    const w = el("world").clientWidth,
+      h = el("world").clientHeight;
+    const lines: string[] = [];
     for (const [id, pos] of Object.entries(positions).sort(
       (a, b) => a[1].y - b[1].y,
     )) {
       const b = document.getElementById(`map-${id}`);
       if (!b) continue;
-      let y = pos.y + 30;
-      for (const other of placed)
-        if (Math.abs(other.x - pos.x) < 76 && Math.abs(other.y - y) < 54)
-          y = other.y + 54;
-      b.style.left = `${pos.x}px`;
-      b.style.top = `${y}px`;
-      b.style.setProperty("--stem-height", `${y - pos.y + 1}px`);
-      placed.push({ x: pos.x, y });
+      // Find a nearby, in-bounds nonoverlapping 44px control. The leader
+      // keeps its physical junction identifiable when dense points separate.
+      const width = b.getBoundingClientRect().width || 68;
+      const candidates: { x: number; y: number; score: number }[] = [];
+      for (let dy = -5; dy <= 5; dy++)
+        for (let dx = -3; dx <= 3; dx++) {
+          const x = Math.max(
+            width / 2 + 3,
+            Math.min(w - width / 2 - 3, pos.x + dx * (width + 8)),
+          );
+          const y = pos.y + 30 + dy * 52;
+          if (y < 3 || y + 44 > h - 3) continue;
+          if (
+            placed.some(
+              (p) =>
+                Math.abs(p.x - x) < (p.w + width) / 2 + 5 &&
+                Math.abs(p.y - y) < 49,
+            )
+          )
+            continue;
+          candidates.push({
+            x,
+            y,
+            score:
+              Math.abs(x - pos.x) * 1.1 +
+              Math.abs(y - pos.y - 30) +
+              (dy < 0 ? 12 : 0),
+          });
+        }
+      candidates.sort((a, b) => a.score - b.score);
+      const best = candidates[0];
+      b.hidden = pos.x < 0 || pos.x > w || pos.y < 0 || pos.y > h || !best;
+      if (!best) continue;
+      b.style.left = `${best.x}px`;
+      b.style.top = `${best.y}px`;
+      placed.push({ ...best, w: width });
+      if (!b.hidden)
+        lines.push(
+          `<line x1="${pos.x}" y1="${pos.y}" x2="${best.x}" y2="${best.y > pos.y ? best.y : best.y + 44}"/>`,
+        );
     }
+    let leaders =
+      el("switches").querySelector<SVGSVGElement>(".control-leaders");
+    if (!leaders) {
+      el("switches").insertAdjacentHTML(
+        "afterbegin",
+        '<svg class="control-leaders" aria-hidden="true"></svg>',
+      );
+      leaders = el("switches").querySelector(".control-leaders");
+    }
+    leaders!.setAttribute("viewBox", `0 0 ${w} ${h}`);
+    leaders!.innerHTML = lines.join("");
     for (const [id, pos] of Object.entries(positions)) {
       const label = document.querySelector<HTMLElement>(
         `[data-landmark="${id}"]`,
       );
       if (label) {
+        label.hidden =
+          pos.x < 15 ||
+          pos.x > el("world").clientWidth - 15 ||
+          pos.y < 0 ||
+          pos.y > el("world").clientHeight - 60;
         label.style.left = `${pos.x}px`;
         label.style.top = `${pos.y + (id === "start" ? -33 : 54)}px`;
       }

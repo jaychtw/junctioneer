@@ -1602,3 +1602,150 @@ footer {
 .map-switch:before {
   height: var(--stem-height, 30px);
 }
+
+/* Production chapters retain the approved miniature railway composition. */
+#level-cards {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+}
+.level-card {
+  padding: 12px;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-content: center;
+}
+.level-card strong {
+  flex: 1;
+  font-size: 13px;
+  min-width: 65px;
+}
+.level-card:disabled {
+  opacity: 0.6;
+}
+.group-badge {
+  display: inline-grid;
+  place-items: center;
+  font: 700 11px/1 system-ui;
+  border: 1px dashed currentColor;
+  border-radius: 4px;
+  width: 18px;
+  height: 18px;
+  margin-left: 5px;
+  color: #385344;
+  background: #e4eadb;
+}
+.linked-preview {
+  outline: 3px dashed #805724;
+  outline-offset: 3px;
+  background: #fff1cb;
+}
+.objective-list {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 20px;
+  display: grid;
+  gap: 10px;
+}
+.objective-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: #385344;
+}
+.objective-number {
+  display: grid;
+  place-items: center;
+  width: 27px;
+  height: 27px;
+  border: 1px solid #8e9d7c;
+  border-radius: 50%;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.objective-list small {
+  display: block;
+  font-size: 11px;
+  color: #59674e;
+  margin-top: 3px;
+}
+.objective-list .visited .objective-number {
+  background: #315e4b;
+  color: #fff9e9;
+}
+.objective-tag {
+  font-size: 10px;
+  max-width: 126px;
+  white-space: normal;
+  text-align: center;
+}
+[hidden] {
+  display: none !important;
+}
+#menu-levels h3 {
+  font-size: 14px;
+  margin: 26px 0 12px;
+}
+.menu-level .card-number {
+  width: 34px;
+  height: 34px;
+}
+.all-complete {
+  border: 2px solid #b68c35;
+  background: #f7edcc;
+}
+@media (max-width: 1000px) {
+  #level-cards {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (max-width: 600px) {
+  #level-cards {
+    grid-template-columns: 1fr;
+  }
+  .level-card {
+    flex-wrap: nowrap;
+  }
+}
+@media (min-width: 801px) {
+  .scene-card {
+    align-self: start;
+    position: sticky;
+    top: 16px;
+  }
+  #world {
+    flex: none;
+    height: clamp(490px, 43vw, 640px);
+  }
+}
+.scene-card[data-phase="running"] .map-switch {
+  visibility: hidden;
+}
+@media (max-width: 600px) {
+  .map-switch:has(.group-badge) {
+    width: 54px;
+    padding: 0 4px;
+  }
+  .map-switch:has(.group-badge) svg {
+    display: none;
+  }
+  .map-switch:has(.group-badge) > span {
+    display: flex;
+    align-items: center;
+  }
+}
+.map-switch:before {
+  display: none;
+}
+.control-leaders {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  stroke: #977335;
+  stroke-width: 1;
+}
+.scene-card[data-phase="running"] .control-leaders {
+  visibility: hidden;
+}

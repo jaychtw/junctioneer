@@ -57,3 +57,11 @@ export function writeSave(
 export function complete(save: Save, id: string): Save {
   return { ...save, completed: [...new Set([...save.completed, id])] };
 }
+
+// Derived unlocks keep old POC saves usable, including nonsequential completions.
+export function unlockedThrough(save: Save): number {
+  return Math.min(
+    14,
+    Math.max(0, ...save.completed.map((id) => Number(id.slice(1)))),
+  );
+}

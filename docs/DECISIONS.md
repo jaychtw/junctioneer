@@ -19,3 +19,7 @@ The original five-second full-animation test deadline failed on hosted software 
 The creative director approved the existing miniature railway direction, particularly the locomotive's dimensional rendering. Production may continue after the shared Skip Journey defect is corrected, tested across all three POC levels, and verified in the redeployed build. No new visual approval is required to continue this approved direction. Final production art acceptance remains separate.
 
 The POC checkpoint and its original evidence remain preserved under `poc-visual-checkpoint-01`. Production captures will be written under a separate directory, never over the original review evidence.
+
+## Production continuation
+
+The shared fix passed hosted QA (72 unit / 32 browser checks), redeployment, and all 12 live early/midway success/failure regressions across L01–L03 before production began. The fixed POC source is separately preserved as `poc-skip-fixed-01`. This satisfied the user's explicit continuation condition. Full production retains the approved original 3D locomotive and miniature modelling/lighting pipeline; new screenshots and recording use `docs/production-evidence`.

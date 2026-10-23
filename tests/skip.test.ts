@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
 import * as T from "three";
-import { Diorama } from "../src/scene";
+import { Diorama, travelCurve } from "../src/scene";
 import { Session, initialSettings, simulate, type Level } from "../src/engine";
 import { levels } from "../src/levels";
 
@@ -50,7 +50,15 @@ function harness(level: Level, winning: boolean) {
     order,
     advance,
     duration,
-    expected: [terminal.x - offset, 0.115, terminal.z - offset],
+    expected: travelCurve(
+      terminal,
+      run.steps.at(-1)!.incoming,
+      run.steps.at(-1)!.outgoing,
+      run.settings,
+    )
+      .getPointAt(1)
+      .add(new T.Vector3(terminal.x - offset, 0.08, terminal.z - offset))
+      .toArray(),
   };
 }
 for (const level of levels)

@@ -137,6 +137,34 @@ export function railCurve(
     return new T.LineCurve3(start, end);
   return new T.QuadraticBezierCurve3(start, new T.Vector3(0, 0.035, 0), end);
 }
+// Presentation follows the same visible physical curve even when a failure
+// stops traversal halfway through a tile (works, unselected points, loops).
+export function travelCurve(
+  r: Rail,
+  incoming: Port | null,
+  outgoing: Port | null,
+  settings: Settings,
+): T.Curve<T.Vector3> {
+  if (incoming && !outgoing && r.ports.length > 1) {
+    const other =
+      r.kind === "junction"
+        ? incoming === r.stem
+          ? r.branches![settings[r.id]]
+          : r.stem!
+        : r.ports.find((p) => p !== incoming)!;
+    const full = railCurve(r, incoming, other);
+    class ArrivalCurve extends T.Curve<T.Vector3> {
+      constructor() {
+        super();
+      }
+      getPoint(t: number, target = new T.Vector3()) {
+        return target.copy(full.getPoint(t * 0.5));
+      }
+    }
+    return new ArrivalCurve();
+  }
+  return railCurve(r, incoming, outgoing);
+}
 function ribbon(
   curve: T.Curve<T.Vector3>,
   width: number,
@@ -286,15 +314,31 @@ function flowers(parent: T.Object3D, x: number, z: number) {
     );
   }
 }
-function station(parent: T.Object3D, r: Rail) {
+function station(parent: T.Object3D, r: Rail, level: Level) {
   const g = new T.Group();
   parent.add(g);
-  const off =
-    r.ports[0] === "W" || r.ports[0] === "E"
-      ? new T.Vector3(0, 0, 0.52)
-      : new T.Vector3(0.52, 0, 0);
-  g.position.copy(off);
-  if (off.x) g.rotation.y = Math.PI / 2;
+  const horizontal = r.ports[0] === "W" || r.ports[0] === "E";
+  const clearance = (sign: number) =>
+    Math.min(
+      ...level.rails
+        .filter((n) => n.id !== r.id)
+        .map((n) =>
+          Math.hypot(
+            n.x - r.x - (horizontal ? 0 : sign * 0.65),
+            n.z - r.z - (horizontal ? sign * 0.65 : 0),
+          ),
+        ),
+    );
+  const side = clearance(1) >= clearance(-1) ? 1 : -1;
+  g.position.set(horizontal ? 0 : side * 0.55, 0, horizontal ? side * 0.55 : 0);
+  g.rotation.y = horizontal
+    ? side < 0
+      ? Math.PI
+      : 0
+    : side > 0
+      ? Math.PI / 2
+      : -Math.PI / 2;
+  if (r.kind === "station") g.scale.setScalar(0.8);
   box(g, 0.94, 0.06, 0.44, mat.cream, 0, 0.03, -0.07);
   for (let i = 0; i < 11; i++)
     box(
@@ -388,6 +432,59 @@ function obstacle(parent: T.Object3D, r: Rail) {
   cylinder(g, 0.045, 0.065, 0.11, orange, 0.27, 0.065, 0.18, 12);
   cylinder(g, 0.08, 0.08, 0.015, mat.cream, 0.27, 0.01, 0.18, 12);
 }
+function waterTower(parent: T.Object3D, x: number, z: number) {
+  const g = new T.Group();
+  g.position.set(x, 0, z);
+  parent.add(g);
+  const iron = material("#557675", 0.5, 0.3);
+  for (const dx of [-0.19, 0.19])
+    for (const dz of [-0.19, 0.19])
+      box(g, 0.035, 0.5, 0.035, mat.timber, dx, 0.25, dz);
+  for (const z of [-0.19, 0.19]) {
+    const brace = box(g, 0.035, 0.57, 0.027, mat.cream, 0, 0.25, z);
+    brace.rotation.z = 0.7;
+    const other = box(g, 0.035, 0.57, 0.027, mat.cream, 0, 0.25, z);
+    other.rotation.z = -0.7;
+  }
+  cylinder(g, 0.28, 0.28, 0.35, iron, 0, 0.65, 0, 24);
+  for (const y of [0.5, 0.78])
+    cylinder(g, 0.29, 0.29, 0.018, mat.cream, 0, y, 0, 24);
+  mesh(new T.ConeGeometry(0.31, 0.13, 24), mat.teal, g, 0, 0.89, 0);
+  for (let i = 0; i < 7; i++)
+    box(g, 0.15, 0.015, 0.018, mat.steel, 0.29, 0.11 + i * 0.1, 0);
+  for (const dz of [-0.085, 0.085])
+    box(g, 0.02, 0.85, 0.02, mat.steel, 0.29, 0.43, dz);
+}
+function signalCabin(parent: T.Object3D, x: number, z: number) {
+  const g = new T.Group();
+  g.position.set(x, 0, z);
+  parent.add(g);
+  box(g, 0.52, 0.08, 0.4, mat.cream, 0, 0.04, 0);
+  box(g, 0.42, 0.36, 0.32, material("#c9996a"), 0, 0.26, 0);
+  for (const dx of [-0.11, 0.11]) {
+    box(g, 0.16, 0.17, 0.02, mat.cream, dx, 0.32, 0.17);
+    box(g, 0.12, 0.13, 0.025, material("#9ebfc0"), dx, 0.32, 0.18);
+    box(g, 0.008, 0.13, 0.03, mat.teal, dx, 0.32, 0.19);
+  }
+  for (const sign of [-1, 1]) {
+    const roof = box(g, 0.55, 0.035, 0.27, mat.teal, 0, 0.49, sign * 0.1);
+    roof.rotation.x = sign * 0.5;
+  }
+  cylinder(g, 0.016, 0.022, 0.65, mat.teal, 0.4, 0.32, 0, 8);
+  box(g, 0.2, 0.035, 0.025, mat.cream, 0.46, 0.6, 0);
+  box(g, 0.05, 0.055, 0.03, material("#c66643"), 0.53, 0.6, 0);
+  for (let i = 0; i < 3; i++)
+    box(
+      g,
+      0.18,
+      0.035,
+      0.08,
+      mat.timber,
+      0.06,
+      0.035 + i * 0.035,
+      0.27 - i * 0.05,
+    );
+}
 function locomotive(parent: T.Object3D): T.Group {
   const g = new T.Group();
   parent.add(g);
@@ -463,6 +560,7 @@ export class Diorama {
       offset: T.Vector3;
       length: number;
       dwell: boolean;
+      objective: number;
     }[];
     total: number;
   } | null = null;
@@ -475,6 +573,7 @@ export class Diorama {
   private panY = 0;
   private raf = 0;
   speed = 1;
+  onProgress: ((objectives: number) => void) | null = null;
   onProject:
     ((positions: Record<string, { x: number; y: number }>) => void) | null =
     null;
@@ -530,6 +629,7 @@ export class Diorama {
   private visibility = () => {
     this.active = !document.hidden;
     this.last = 0;
+    if (this.active) this.render();
   };
   private resize() {
     const w = this.container.clientWidth,
@@ -538,8 +638,9 @@ export class Diorama {
     this.renderer.setSize(w, h);
     const aspect = w / h;
     // Frame complete physical slab, with room for tree and roof silhouettes.
-    const viewW = 9.5,
-      viewH = 7.3;
+    const extra = Math.max(0, (this.level?.size ?? 5) - 5);
+    const viewW = 9.5 + extra * 1.42,
+      viewH = 7.3 + extra * 1.12;
     const ch = Math.max(viewH, viewW / aspect),
       cw = ch * aspect;
     this.camera.left = -cw / 2;
@@ -573,9 +674,16 @@ export class Diorama {
     this.railway = new T.Group();
     this.indicators = new T.Group();
     this.root.add(this.railway, this.indicators);
-    slab(this.root, 6.45, 6.45, 0.16, mat.cream, -0.36);
-    slab(this.root, 6.39, 6.39, 0.18, mat.side, -0.2);
-    slab(this.root, 6.4, 6.4, 0.035, mat.grass, -0.035);
+    const base = level.size + 1.4;
+    const landscape =
+      level.chapter === 2
+        ? material("#a5bfad")
+        : level.chapter === 3
+          ? material("#b5bd91")
+          : mat.grass;
+    slab(this.root, base + 0.05, base + 0.05, 0.16, mat.cream, -0.36);
+    slab(this.root, base - 0.01, base - 0.01, 0.18, mat.side, -0.2);
+    slab(this.root, base, base, 0.035, landscape, -0.035);
     const offset = (level.size - 1) / 2;
     for (const r of level.rails) {
       const g = new T.Group();
@@ -586,7 +694,8 @@ export class Diorama {
           track(g, railCurve(r, r.stem!, b), false, true),
         );
       else track(g, railCurve(r, r.ports[0], r.ports[1] ?? null), false, false);
-      if (r.id === level.destination) station(g, r);
+      if (r.id === level.destination || r.kind === "station")
+        station(g, r, level);
       else if (r.blocked) obstacle(g, r);
       else if (r.kind === "terminus" && r.end === "dead") {
         box(g, 0.34, 0.045, 0.04, mat.timber, 0, 0.12, 0);
@@ -594,43 +703,46 @@ export class Diorama {
           box(g, 0.04, 0.14, 0.05, mat.timber, x, 0.07, 0);
       }
     }
-    // Hand-composed scenery perimeter: never covers decision-relevant rail.
+    // Authored perimeter composition, scaled to each chapter's physical slab.
+    // Props stay outside the rail envelope; never scatter scenery across routes.
+    const edge = level.size / 2 + 0.18;
     [
-      [-2.65, -2.3, 0.95],
-      [-2.1, -2.55, 0.75],
-      [-1.35, -2.65, 1.05],
-      [0.0, -2.65, 0.74],
-      [1, -2.7, 0.85],
-      [-2.65, -1.1, 0.65],
-      [-2.55, 1.5, 0.65],
-      [2.65, -2.45, 0.78],
-      [2.65, 2.6, 0.68],
-    ].forEach(([x, z, s], i) => tree(this.root, x, z, s, i));
-    for (const r of [
-      { x: -1.6, z: 1.9 },
-      { x: -0.7, z: 2.5 },
-      { x: 0.8, z: 2.65 },
-      { x: -2.6, z: 0.1 },
+      [-1, -0.88, 0.95],
+      [-0.78, -1, 0.75],
+      [-0.5, -1, 1.05],
+      [0, -1, 0.74],
+      [0.38, -1, 0.85],
+      [-1, -0.42, 0.65],
+      [-1, 0.56, 0.65],
+      [1, -0.9, 0.78],
+      [1, 1, 0.68],
+    ].forEach(([x, z, scale], i) =>
+      tree(this.root, x * edge, z * edge, scale, i),
+    );
+    for (const [x, z] of [
+      [-0.6, 1],
+      [-0.25, 1],
+      [0.3, 1],
+      [-1, 0.04],
     ]) {
-      bush(this.root, r.x, r.z, 0.12);
-      flowers(this.root, r.x + 0.2, r.z + 0.1);
+      bush(this.root, x * edge, z * edge, 0.12);
+      flowers(this.root, x * edge + 0.18, z * edge + 0.06);
     }
-    fence(this.root, -1.4, 2.72, 0, 1.4);
-    fence(this.root, -2.77, 0.8, Math.PI / 2, 0.7);
-    // Weathered wooden direction marker, lamp, and a cluster of smooth field stones.
-    cylinder(this.root, 0.019, 0.025, 0.4, mat.timber, -2.1, 0.2, 0.6, 8);
-    box(this.root, 0.29, 0.09, 0.025, mat.cream, -2.1, 0.37, 0.6);
+    fence(this.root, -edge * 0.52, edge + 0.04, 0, 1.4);
+    fence(this.root, -edge - 0.05, edge * 0.3, Math.PI / 2, 0.7);
     for (let i = 0; i < 6; i++) {
       const rock = mesh(
         new T.DodecahedronGeometry(0.07 + i * 0.006, 0),
         material("#a6ad8b"),
         this.root,
-        1.4 + Math.sin(i * 7) * 0.2,
+        edge * 0.52 + Math.sin(i * 7) * 0.2,
         0.045,
-        2.55 + Math.cos(i * 4) * 0.12,
+        edge * 0.95 + Math.cos(i * 4) * 0.1,
       );
       rock.scale.y = 0.65;
     }
+    if (level.chapter === 2) waterTower(this.root, edge * 0.78, -edge * 0.98);
+    if (level.chapter === 3) signalCabin(this.root, edge * 0.72, -edge * 0.98);
     // Paint the departure arrow in world space so the visible heading matches the graph.
     const departure = level.rails.find((r) => r.id === level.start.node)!;
     const marker = new T.Shape();
@@ -659,8 +771,7 @@ export class Diorama {
     this.train = locomotive(this.root);
     this.update(settings);
     this.home();
-    this.project();
-    this.render();
+    this.resize();
   }
   private batchStaticGeometry() {
     this.root.updateMatrixWorld(true);
@@ -730,12 +841,13 @@ export class Diorama {
     const offset = (this.level.size - 1) / 2;
     const paths = run.steps.map((s: Step) => {
       const r = this.level.rails.find((r) => r.id === s.node)!;
-      const curve = railCurve(r, s.incoming, s.outgoing);
+      const curve = travelCurve(r, s.incoming, s.outgoing, run.settings);
       return {
         curve,
         offset: new T.Vector3(r.x - offset, 0.08, r.z - offset),
         length: curve.getLength(),
         dwell: s.dwell,
+        objective: s.objective,
       };
     });
     const total = paths.reduce((a, p) => a + p.length + (p.dwell ? 0.4 : 0), 0);
@@ -773,6 +885,7 @@ export class Diorama {
     this.place(animation.paths[animation.paths.length - 1], 1);
     this.renderer.domElement.dataset.journeyProgress = "1";
     this.renderer.domElement.dataset.terminalReason = animation.run.reason;
+    this.onProgress?.(animation.run.objectives);
     this.render();
     animation.done();
   }
@@ -790,7 +903,18 @@ export class Diorama {
     for (const path of a.paths) {
       const len = path.length + (path.dwell ? 0.4 : 0);
       if (distance <= len) {
-        this.place(path, Math.min(1, distance / Math.max(0.001, path.length)));
+        // A station pause belongs at the centre of its visible curve.
+        const half = path.length / 2;
+        const travelled =
+          !path.dwell || distance < half
+            ? distance
+            : distance < half + 0.4
+              ? half
+              : distance - 0.4;
+        this.place(path, Math.min(1, travelled / Math.max(0.001, path.length)));
+        this.onProgress?.(
+          path.objective - (path.dwell && distance < half ? 1 : 0),
+        );
         break;
       }
       distance -= len;
@@ -839,7 +963,8 @@ export class Diorama {
         r.kind === "junction" ||
         r.id === this.level.start.node ||
         r.id === this.level.destination ||
-        r.blocked,
+        r.blocked ||
+        r.kind === "station",
     )) {
       const v = new T.Vector3(r.x - o, 0.16, r.z - o).project(this.camera);
       positions[r.id] = {

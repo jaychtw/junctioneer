@@ -1,0 +1,545 @@
+{
+  "createdAt": "2026-10-23T15:13:44.291Z",
+  "browser": "154.0.8037.57",
+  "build": "Production Vite build served by vite preview",
+  "captures": [
+    {
+      "file": "chapter-1-320-en.png",
+      "state": "L03 planning",
+      "viewport": {
+        "width": 320,
+        "height": 844
+      },
+      "language": "en",
+      "renderCalls": "145",
+      "triangles": "44944"
+    },
+    {
+      "file": "chapter-2-320-en.png",
+      "state": "L08 planning",
+      "viewport": {
+        "width": 320,
+        "height": 844
+      },
+      "language": "en",
+      "renderCalls": "153",
+      "triangles": "56392"
+    },
+    {
+      "file": "chapter-3-320-en.png",
+      "state": "L15 planning",
+      "viewport": {
+        "width": 320,
+        "height": 844
+      },
+      "language": "en",
+      "renderCalls": "183",
+      "triangles": "82424"
+    },
+    {
+      "file": "chapter-1-320-zh-TW.png",
+      "state": "L03 planning",
+      "viewport": {
+        "width": 320,
+        "height": 844
+      },
+      "language": "zh-TW",
+      "renderCalls": "145",
+      "triangles": "44944"
+    },
+    {
+      "file": "chapter-2-320-zh-TW.png",
+      "state": "L08 planning",
+      "viewport": {
+        "width": 320,
+        "height": 844
+      },
+      "language": "zh-TW",
+      "renderCalls": "153",
+      "triangles": "56392"
+    },
+    {
+      "file": "chapter-3-320-zh-TW.png",
+      "state": "L15 planning",
+      "viewport": {
+        "width": 320,
+        "height": 844
+      },
+      "language": "zh-TW",
+      "renderCalls": "183",
+      "triangles": "82424"
+    },
+    {
+      "file": "chapter-1-390-en.png",
+      "state": "L03 planning",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "language": "en",
+      "renderCalls": "145",
+      "triangles": "44944"
+    },
+    {
+      "file": "chapter-2-390-en.png",
+      "state": "L08 planning",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "language": "en",
+      "renderCalls": "153",
+      "triangles": "56392"
+    },
+    {
+      "file": "chapter-3-390-en.png",
+      "state": "L15 planning",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "language": "en",
+      "renderCalls": "183",
+      "triangles": "82424"
+    },
+    {
+      "file": "chapter-1-390-zh-TW.png",
+      "state": "L03 planning",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "language": "zh-TW",
+      "renderCalls": "145",
+      "triangles": "44944"
+    },
+    {
+      "file": "chapter-2-390-zh-TW.png",
+      "state": "L08 planning",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "language": "zh-TW",
+      "renderCalls": "153",
+      "triangles": "56392"
+    },
+    {
+      "file": "chapter-3-390-zh-TW.png",
+      "state": "L15 planning",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "language": "zh-TW",
+      "renderCalls": "183",
+      "triangles": "82424"
+    },
+    {
+      "file": "chapter-3-mobile-inspection.png",
+      "state": "L15 zoom and pan, zh-TW",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "language": "zh-TW",
+      "renderCalls": "182",
+      "triangles": "82412"
+    },
+    {
+      "file": "chapter-1-768-en.png",
+      "state": "L03 planning",
+      "viewport": {
+        "width": 768,
+        "height": 1080
+      },
+      "language": "en",
+      "renderCalls": "145",
+      "triangles": "44944"
+    },
+    {
+      "file": "chapter-2-768-en.png",
+      "state": "L08 planning",
+      "viewport": {
+        "width": 768,
+        "height": 1080
+      },
+      "language": "en",
+      "renderCalls": "153",
+      "triangles": "56392"
+    },
+    {
+      "file": "chapter-3-768-en.png",
+      "state": "L15 planning",
+      "viewport": {
+        "width": 768,
+        "height": 1080
+      },
+      "language": "en",
+      "renderCalls": "183",
+      "triangles": "82424"
+    },
+    {
+      "file": "chapter-1-768-zh-TW.png",
+      "state": "L03 planning",
+      "viewport": {
+        "width": 768,
+        "height": 1080
+      },
+      "language": "zh-TW",
+      "renderCalls": "145",
+      "triangles": "44944"
+    },
+    {
+      "file": "chapter-2-768-zh-TW.png",
+      "state": "L08 planning",
+      "viewport": {
+        "width": 768,
+        "height": 1080
+      },
+      "language": "zh-TW",
+      "renderCalls": "153",
+      "triangles": "56392"
+    },
+    {
+      "file": "chapter-3-768-zh-TW.png",
+      "state": "L15 planning",
+      "viewport": {
+        "width": 768,
+        "height": 1080
+      },
+      "language": "zh-TW",
+      "renderCalls": "183",
+      "triangles": "82424"
+    },
+    {
+      "file": "chapter-1-1440-en.png",
+      "state": "L03 planning",
+      "viewport": {
+        "width": 1440,
+        "height": 1080
+      },
+      "language": "en",
+      "renderCalls": "145",
+      "triangles": "44944"
+    },
+    {
+      "file": "chapter-2-1440-en.png",
+      "state": "L08 planning",
+      "viewport": {
+        "width": 1440,
+        "height": 1080
+      },
+      "language": "en",
+      "renderCalls": "153",
+      "triangles": "56392"
+    },
+    {
+      "file": "chapter-3-1440-en.png",
+      "state": "L15 planning",
+      "viewport": {
+        "width": 1440,
+        "height": 1080
+      },
+      "language": "en",
+      "renderCalls": "183",
+      "triangles": "82424"
+    },
+    {
+      "file": "chapter-1-1440-zh-TW.png",
+      "state": "L03 planning",
+      "viewport": {
+        "width": 1440,
+        "height": 1080
+      },
+      "language": "zh-TW",
+      "renderCalls": "145",
+      "triangles": "44944"
+    },
+    {
+      "file": "chapter-2-1440-zh-TW.png",
+      "state": "L08 planning",
+      "viewport": {
+        "width": 1440,
+        "height": 1080
+      },
+      "language": "zh-TW",
+      "renderCalls": "153",
+      "triangles": "56392"
+    },
+    {
+      "file": "chapter-3-1440-zh-TW.png",
+      "state": "L15 planning",
+      "viewport": {
+        "width": 1440,
+        "height": 1080
+      },
+      "language": "zh-TW",
+      "renderCalls": "183",
+      "triangles": "82424"
+    },
+    {
+      "file": "level-01-desktop.png",
+      "state": "L01 canonical selected route",
+      "viewport": {
+        "width": 1440,
+        "height": 1080
+      },
+      "language": "en",
+      "renderCalls": "145",
+      "triangles": "37512"
+    },
+    {
+      "file": "level-02-desktop.png",
+      "state": "L02 canonical selected route",
+      "viewport": {
+        "width": 1440,
+        "height": 1080
+      },
+      "language": "en",
+      "renderCalls": "153",
+      "triangles": "43184"
+    },
+    {
+      "file": "level-03-desktop.png",
+      "state": "L03 canonical selected route",
+      "viewport": {
+        "width": 1440,
+        "height": 1080
+      },
+      "language": "en",
+      "renderCalls": "145",
+      "triangles": "44944"
+    },
+    {
+      "file": "level-04-desktop.png",
+      "state": "L04 canonical selected route",
+      "viewport": {
+        "width": 1440,
+        "height": 1080
+      },
+      "language": "en",
+      "renderCalls": "143",
+      "triangles": "35840"
+    },
+    {
+      "file": "level-05-desktop.png",
+      "state": "L05 canonical selected route",
+      "viewport": {
+        "width": 1440,
+        "height": 1080
+      },
+      "language": "en",
+      "renderCalls": "153",
+      "triangles": "47512"
+    },
+    {
+      "file": "level-06-desktop.png",
+      "state": "L06 canonical selected route",
+      "viewport": {
+        "width": 1440,
+        "height": 1080
+      },
+      "language": "en",
+      "renderCalls": "155",
+      "triangles": "53584"
+    },
+    {
+      "file": "level-07-desktop.png",
+      "state": "L07 canonical selected route",
+      "viewport": {
+        "width": 1440,
+        "height": 1080
+      },
+      "language": "en",
+      "renderCalls": "155",
+      "triangles": "49904"
+    },
+    {
+      "file": "level-08-desktop.png",
+      "state": "L08 canonical selected route",
+      "viewport": {
+        "width": 1440,
+        "height": 1080
+      },
+      "language": "en",
+      "renderCalls": "153",
+      "triangles": "56392"
+    },
+    {
+      "file": "level-09-desktop.png",
+      "state": "L09 canonical selected route",
+      "viewport": {
+        "width": 1440,
+        "height": 1080
+      },
+      "language": "en",
+      "renderCalls": "155",
+      "triangles": "62704"
+    },
+    {
+      "file": "level-10-desktop.png",
+      "state": "L10 canonical selected route",
+      "viewport": {
+        "width": 1440,
+        "height": 1080
+      },
+      "language": "en",
+      "renderCalls": "171",
+      "triangles": "92072"
+    },
+    {
+      "file": "level-11-desktop.png",
+      "state": "L11 canonical selected route",
+      "viewport": {
+        "width": 1440,
+        "height": 1080
+      },
+      "language": "en",
+      "renderCalls": "159",
+      "triangles": "63904"
+    },
+    {
+      "file": "level-12-desktop.png",
+      "state": "L12 canonical selected route",
+      "viewport": {
+        "width": 1440,
+        "height": 1080
+      },
+      "language": "en",
+      "renderCalls": "159",
+      "triangles": "63312"
+    },
+    {
+      "file": "level-13-desktop.png",
+      "state": "L13 canonical selected route",
+      "viewport": {
+        "width": 1440,
+        "height": 1080
+      },
+      "language": "en",
+      "renderCalls": "175",
+      "triangles": "81592"
+    },
+    {
+      "file": "level-14-desktop.png",
+      "state": "L14 canonical selected route",
+      "viewport": {
+        "width": 1440,
+        "height": 1080
+      },
+      "language": "en",
+      "renderCalls": "175",
+      "triangles": "88880"
+    },
+    {
+      "file": "level-15-desktop.png",
+      "state": "L15 canonical selected route",
+      "viewport": {
+        "width": 1440,
+        "height": 1080
+      },
+      "language": "en",
+      "renderCalls": "183",
+      "triangles": "82424"
+    },
+    {
+      "file": "ordered-wrong-arrival.png",
+      "state": "L08 wrong-order failure",
+      "viewport": {
+        "width": 1440,
+        "height": 1080
+      },
+      "language": "en",
+      "renderCalls": "153",
+      "triangles": "56392"
+    },
+    {
+      "file": "ordered-stop-dwell.png",
+      "state": "L08 live first objective, train paused at station",
+      "viewport": {
+        "width": 1440,
+        "height": 1080
+      },
+      "language": "en",
+      "renderCalls": "153",
+      "triangles": "56392"
+    },
+    {
+      "file": "ordered-arrival.png",
+      "state": "L08 two ordered stops, successful arrival",
+      "viewport": {
+        "width": 1440,
+        "height": 1080
+      },
+      "language": "en",
+      "renderCalls": "153",
+      "triangles": "56392"
+    }
+  ],
+  "buildHashes": {
+    "dist/index.html": "389a4fdba5fc8aa244c7f7b8bdf91144e199f936d140323e66def53b0807132c",
+    "dist/assets/index-C2twwOhq.css": "f9c2dd6f5cc3d5e7cc27de7a322a1f57e51b995bc800d61bd1982af16b20b0ef",
+    "dist/assets/index-CWDoCSEu.js": "2a6efbfd349731d61e15a09ce5776938772c5d05265a223fa9678e0774f578f3"
+  },
+  "video": "production-playthrough.webm",
+  "videoMethod": "Actual Chrome DevTools screencast frames, original timestamps, system FFmpeg VP9",
+  "videoFrames": 191,
+  "errors": [],
+  "hashes": {
+    "src/authoring.ts": "db3072360de268b82fdfa1287b84c20e69e161bd5419faec2129f87dc2c9453f",
+    "src/engine.ts": "b458465bed0173befd148411e97bcbe2813c6a0873d099059a62c677a1088a54",
+    "src/i18n.ts": "9bd9abeb6efc8b327830e7b05f635b9c846ace60125358212e3a8c97e3afceda",
+    "src/levels-production.ts": "e2cb72f4529bea998e763b6d510431409279d877237ab6731883d530904c09dc",
+    "src/levels.ts": "57d7568c7044e75206b0bd49484b6e800ea9bac057548dff56eb37a28384f553",
+    "src/main.ts": "75f1b0af2a5b0b46ddc70fd30f55b9ba9a370ee49d31b76ce1ed4573ed431b87",
+    "src/scene.ts": "015787f09b0c146e73170353938db6dee2d618090cbddda414def781f9a783ce",
+    "src/storage.ts": "34fba209d94e3ccda2ec649f7141ea90bfcdbcf5fd9ff023809f352325f55084",
+    "src/style.css": "7fffe218a69775acc4a3d89687f42020cd1c527071e38a7b3e58ee264c6ee626",
+    "src/vite-env.d.ts": "65996936fbb042915f7b74a200fcdde7e410f32a669b1ab9597cfaa4b0faddb5",
+    "docs/production-evidence/chapter-1-1440-en.png": "49e48c65975c831e9e3a9b4059ff52fc83dda8b2be7de79cd0fbef4a73d94904",
+    "docs/production-evidence/chapter-1-1440-zh-TW.png": "0d9397523c9139941783b3691cf48b96bc1f22dfd037413ff7031a5ab2688ddc",
+    "docs/production-evidence/chapter-1-320-en.png": "5ce1c1271951b7680ac37e69765ba09d2f00f15d1f9f6ab821a68319b89d5c8e",
+    "docs/production-evidence/chapter-1-320-zh-TW.png": "5e761db08216ce1a027eaa79adf385a69aedb2b10871b4a845b66fcb83e2bbe1",
+    "docs/production-evidence/chapter-1-390-en.png": "7b1c7167331b097709ae3d18e120ce42411ff2b0d7b3b6f346d7f0878730ae4c",
+    "docs/production-evidence/chapter-1-390-zh-TW.png": "150b00cbfa0b505bd94711a2ec02cb3fa6d20e001d51f44fb1e29bb93e8759e8",
+    "docs/production-evidence/chapter-1-768-en.png": "1eb4dd056ce41d154ad80229a5713513994d33f5ca6294f44ff305ce844a7115",
+    "docs/production-evidence/chapter-1-768-zh-TW.png": "7e1fd4f10f41a5d66b12e08a63ff4e4b5eab1dd2426c248720cf10446699cf35",
+    "docs/production-evidence/chapter-2-1440-en.png": "40283d910709c0e7de501167217f2dcad204f6f8384f686211f13f21b269cc22",
+    "docs/production-evidence/chapter-2-1440-zh-TW.png": "65c77b591fa487b2449f0b4f92d2aeebb56c7900ac9f4daae35f12c403471b71",
+    "docs/production-evidence/chapter-2-320-en.png": "b40e9907b5be965e8fad3c31efd3ff045c2465e8150b0caa4a74b320db10d529",
+    "docs/production-evidence/chapter-2-320-zh-TW.png": "520cf97add162f441709b67d4c7999cc7385e46028bf3c5b13481df2ef4ca2fa",
+    "docs/production-evidence/chapter-2-390-en.png": "336d0b3ca23696cc1ee31576786fdbe3201223a2b16e7fb32dc9fe065bf750f3",
+    "docs/production-evidence/chapter-2-390-zh-TW.png": "85c85b704ae7c97057aa9af86e948c6fb7f1660462fabedd92ee042691398cbf",
+    "docs/production-evidence/chapter-2-768-en.png": "bf200269910fff20dd3810bce488da58732c4b87949a0df6404f7e3e149f9e7d",
+    "docs/production-evidence/chapter-2-768-zh-TW.png": "f712a4d56bf7336ee10bb259d1d4dc661ec2a2f258df1f272141038528d5b341",
+    "docs/production-evidence/chapter-3-1440-en.png": "0e89ad5ca37fbec945307a8e05d3e17c9d167a406992417e8710a1ddb31fe057",
+    "docs/production-evidence/chapter-3-1440-zh-TW.png": "437b48f14c90a0b61ccdc88bfa9180150318f369f6f042704720b21914957e73",
+    "docs/production-evidence/chapter-3-320-en.png": "bb6aa19c71f2bf457aa217947b694e0841f4090087452529ad09997ac11c6eec",
+    "docs/production-evidence/chapter-3-320-zh-TW.png": "8e7e7d6b2bd3d7bac311b0439c80592f140e12c04410602af3640035104bbbf5",
+    "docs/production-evidence/chapter-3-390-en.png": "f133eb24fab1886c857629d4314ece1b219c255964218430c2ddebbdea56e6ad",
+    "docs/production-evidence/chapter-3-390-zh-TW.png": "7e459736d80396eefccdf142f13679ddf3cc94f5773f093719c9f663de6ae62e",
+    "docs/production-evidence/chapter-3-768-en.png": "4f691e13971c3219b551bb440b5dcf4ab71c155274651dae395c5689644f132f",
+    "docs/production-evidence/chapter-3-768-zh-TW.png": "7afd556c1678dffc9fc7ece7f0e16a7714beebd2c31717a68a3b83b0559fdfe2",
+    "docs/production-evidence/chapter-3-mobile-inspection.png": "b9b13528e8745a70f9578b577eb4b712a93adae0041dfeeb796364c448e0db4b",
+    "docs/production-evidence/level-01-desktop.png": "53a407fede408559ba3612976ec7b22c0351055faebba0510c78f5f90f005f4d",
+    "docs/production-evidence/level-02-desktop.png": "5c88e105f71f93a6391a7819be892661a1fdfb4ea748ad3a567fad0a05f9fb07",
+    "docs/production-evidence/level-03-desktop.png": "92fb890f842322d49b5df35ff9017dffd7d8d37126b52f1a8cd11062b92fc06b",
+    "docs/production-evidence/level-04-desktop.png": "2661693367d809170ba7aa34ccdb5edce6fd6f4150da9f4387b99f845b7577b4",
+    "docs/production-evidence/level-05-desktop.png": "6ced90718021e265b8fcf3249df673e4e77ce08bc265048051bda4051485430d",
+    "docs/production-evidence/level-06-desktop.png": "0cc657658f0521c46abd60447377610937ad43396f87168ad0910c6bbf4df555",
+    "docs/production-evidence/level-07-desktop.png": "98065a4b05a37de374719ee98b96e1cbc1140915c07e1d45181930cf4bcf2de5",
+    "docs/production-evidence/level-08-desktop.png": "250e292a76ed880ac0e91bfc4de487d31932883ca5fece3a36ec373891a25f86",
+    "docs/production-evidence/level-09-desktop.png": "0fcd7489bf22627a045f73b6ca3e034ef796750924f043e2e09fc1df01e29252",
+    "docs/production-evidence/level-10-desktop.png": "f9eb1fc17b7ef792907ba2e8d8e32529a1ad0d306e584e57f237d5f36a994851",
+    "docs/production-evidence/level-11-desktop.png": "d8ba27b30748abeae718fabb2a2650ff8bd313a982fed3a9e5096042c80dbdb7",
+    "docs/production-evidence/level-12-desktop.png": "54a7a717f3ea0f671e71a6d0e9c1281b6775d8ab1c27f05759378d38a6fd19e6",
+    "docs/production-evidence/level-13-desktop.png": "134ac254a46902a4af0b971399b6ca28c68c4641df89aeaefa4e60614678a415",
+    "docs/production-evidence/level-14-desktop.png": "6a43299321e0c079af5d0331571fa510b0a28a1db720db7ee84004d1f0e0b7e4",
+    "docs/production-evidence/level-15-desktop.png": "67c54d2b611767cf3e8b944bd20b95c2a05537fb271c2c0a9ae43f7deac78509",
+    "docs/production-evidence/ordered-arrival.png": "341a6bd4037b1617f65ae12caaa83cc8e1689de0dbb0374a981aeff1e87b6594",
+    "docs/production-evidence/ordered-stop-dwell.png": "96dd6ce7687487e0d42c580721e309dec330e522670fc5b17b0b7aac120d9fa1",
+    "docs/production-evidence/ordered-wrong-arrival.png": "cfe6efcb5a313baf176b9e32ab6149c4f6b7281960969633d1bc45daff1fe32d",
+    "docs/production-evidence/production-playthrough.webm": "e09e2e82f39aece6bf4ec16c4dd9f96d63136cb2acd7407d85d8f7431a284c89"
+  }
+}

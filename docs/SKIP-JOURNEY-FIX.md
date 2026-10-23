@@ -32,3 +32,7 @@ Hosted setup correction: the dependency-install step on `ubuntu-latest` stalled.
 - All **12 live Skip regressions passed**, 0 failed, 0 skipped. Full run data: [live-skip-results.json](fix-evidence/live-skip-results.json). HTTPS checks remained enabled.
 - The post-fix GPU reproduction shows an immediate terminal draw in all three levels (145 / 153 / 145 draw calls), compared with zero before the correction.
 - The user’s condition for starting production is now met. Original POC snapshot remains `poc-visual-checkpoint-01`; the fixed source is separately tagged `poc-skip-fixed-01`.
+
+## Full-game continuation
+
+The unit completion harness now covers all 15 levels × success/failure × early/midway (60 cases), with additional lifecycle/geometry assertions. The original 12 browser regressions remain active. Interrupted curved arrivals now follow the actual displayed rail; the L03 failure endpoint is derived from its port vectors rather than the off-rail cell centre. Level 2's straight terminal geometry and results remain unchanged. See [production QA](PRODUCTION-QA.md) for current counts and new deployment evidence; the fixed POC evidence above remains historical and unchanged.

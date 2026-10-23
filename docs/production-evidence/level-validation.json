@@ -1,0 +1,4544 @@
+{
+  "scope": "Production authoring: 15 handcrafted levels; exhaustive reachable group settings with the production simulator.",
+  "levels": [
+    {
+      "id": "L01",
+      "name": [
+        "All Aboard",
+        "準備出發"
+      ],
+      "chapter": 1,
+      "size": 5,
+      "topology": [
+        {
+          "id": "start",
+          "x": 0,
+          "z": 2,
+          "ports": [
+            "E"
+          ],
+          "kind": "terminus",
+          "end": "start"
+        },
+        {
+          "id": "approach",
+          "x": 1,
+          "z": 2,
+          "ports": [
+            "W",
+            "E"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "J1",
+          "x": 2,
+          "z": 2,
+          "ports": [
+            "W",
+            "N",
+            "E"
+          ],
+          "kind": "junction",
+          "stem": "W",
+          "branches": [
+            "N",
+            "E"
+          ],
+          "initial": 0
+        },
+        {
+          "id": "home",
+          "x": 3,
+          "z": 2,
+          "ports": [
+            "W",
+            "E"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "station",
+          "x": 4,
+          "z": 2,
+          "ports": [
+            "W"
+          ],
+          "kind": "terminus"
+        },
+        {
+          "id": "bend",
+          "x": 2,
+          "z": 1,
+          "ports": [
+            "S",
+            "E"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "siding",
+          "x": 3,
+          "z": 1,
+          "ports": [
+            "W",
+            "E"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "works",
+          "x": 4,
+          "z": 1,
+          "ports": [
+            "W"
+          ],
+          "kind": "terminus",
+          "end": "dead",
+          "blocked": true
+        }
+      ],
+      "start": {
+        "node": "start",
+        "exit": "E"
+      },
+      "stops": [],
+      "destination": "station",
+      "groups": [],
+      "initial": {
+        "J1": 0
+      },
+      "switches": 1,
+      "independentControls": 1,
+      "settingsChecked": 2,
+      "solutionCount": 1,
+      "canonical": {
+        "J1": 1
+      },
+      "route": [
+        "start",
+        "approach",
+        "J1",
+        "home",
+        "station"
+      ],
+      "routeLength": 5,
+      "outcomes": {
+        "blocked": 1,
+        "success": 1
+      },
+      "failures": [
+        {
+          "settings": {
+            "J1": 0
+          },
+          "reason": "blocked",
+          "at": "works",
+          "objectives": 0,
+          "route": [
+            "start",
+            "approach",
+            "J1",
+            "bend",
+            "siding",
+            "works"
+          ]
+        }
+      ],
+      "difficulty": "One independent switch. Read its selected connection; distinguish station from a visibly blocked siding."
+    },
+    {
+      "id": "L02",
+      "name": [
+        "Two Decisions",
+        "兩次選擇"
+      ],
+      "chapter": 1,
+      "size": 5,
+      "topology": [
+        {
+          "id": "start",
+          "x": 0,
+          "z": 3,
+          "ports": [
+            "E"
+          ],
+          "kind": "terminus",
+          "end": "start"
+        },
+        {
+          "id": "approach",
+          "x": 1,
+          "z": 3,
+          "ports": [
+            "W",
+            "E"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "J1",
+          "x": 2,
+          "z": 3,
+          "ports": [
+            "W",
+            "E",
+            "N"
+          ],
+          "kind": "junction",
+          "stem": "W",
+          "branches": [
+            "E",
+            "N"
+          ],
+          "initial": 0
+        },
+        {
+          "id": "siding",
+          "x": 3,
+          "z": 3,
+          "ports": [
+            "W",
+            "E"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "end",
+          "x": 4,
+          "z": 3,
+          "ports": [
+            "W"
+          ],
+          "kind": "terminus",
+          "end": "dead"
+        },
+        {
+          "id": "bend",
+          "x": 2,
+          "z": 2,
+          "ports": [
+            "S",
+            "E"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "J2",
+          "x": 3,
+          "z": 2,
+          "ports": [
+            "W",
+            "N",
+            "E"
+          ],
+          "kind": "junction",
+          "stem": "W",
+          "branches": [
+            "N",
+            "E"
+          ],
+          "initial": 1
+        },
+        {
+          "id": "hill",
+          "x": 3,
+          "z": 1,
+          "ports": [
+            "S",
+            "N"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "station",
+          "x": 3,
+          "z": 0,
+          "ports": [
+            "S"
+          ],
+          "kind": "terminus"
+        },
+        {
+          "id": "works",
+          "x": 4,
+          "z": 2,
+          "ports": [
+            "W"
+          ],
+          "kind": "terminus",
+          "end": "dead",
+          "blocked": true
+        }
+      ],
+      "start": {
+        "node": "start",
+        "exit": "E"
+      },
+      "stops": [],
+      "destination": "station",
+      "groups": [],
+      "initial": {
+        "J1": 0,
+        "J2": 1
+      },
+      "switches": 2,
+      "independentControls": 2,
+      "settingsChecked": 4,
+      "solutionCount": 1,
+      "canonical": {
+        "J1": 1,
+        "J2": 0
+      },
+      "route": [
+        "start",
+        "approach",
+        "J1",
+        "bend",
+        "J2",
+        "hill",
+        "station"
+      ],
+      "routeLength": 7,
+      "outcomes": {
+        "dead-end": 2,
+        "blocked": 1,
+        "success": 1
+      },
+      "failures": [
+        {
+          "settings": {
+            "J1": 0,
+            "J2": 1
+          },
+          "reason": "dead-end",
+          "at": "end",
+          "objectives": 0,
+          "route": [
+            "start",
+            "approach",
+            "J1",
+            "siding",
+            "end"
+          ]
+        },
+        {
+          "settings": {
+            "J1": 1,
+            "J2": 1
+          },
+          "reason": "blocked",
+          "at": "works",
+          "objectives": 0,
+          "route": [
+            "start",
+            "approach",
+            "J1",
+            "bend",
+            "J2",
+            "works"
+          ]
+        },
+        {
+          "settings": {
+            "J1": 0,
+            "J2": 0
+          },
+          "reason": "dead-end",
+          "at": "end",
+          "objectives": 0,
+          "route": [
+            "start",
+            "approach",
+            "J1",
+            "siding",
+            "end"
+          ]
+        }
+      ],
+      "difficulty": "Two independent switches in sequence. The first selects continuation, the second distinguishes the station branch from works."
+    },
+    {
+      "id": "L03",
+      "name": [
+        "Scenic Route",
+        "沿途風景"
+      ],
+      "chapter": 1,
+      "size": 5,
+      "topology": [
+        {
+          "id": "start",
+          "x": 0,
+          "z": 2,
+          "ports": [
+            "E"
+          ],
+          "kind": "terminus",
+          "end": "start"
+        },
+        {
+          "id": "approach",
+          "x": 1,
+          "z": 2,
+          "ports": [
+            "W",
+            "E"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "J1",
+          "x": 2,
+          "z": 2,
+          "ports": [
+            "W",
+            "N",
+            "E"
+          ],
+          "kind": "junction",
+          "stem": "W",
+          "branches": [
+            "N",
+            "E"
+          ],
+          "initial": 1
+        },
+        {
+          "id": "rise",
+          "x": 2,
+          "z": 1,
+          "ports": [
+            "S",
+            "N"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "bend1",
+          "x": 2,
+          "z": 0,
+          "ports": [
+            "S",
+            "E"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "ridge",
+          "x": 3,
+          "z": 0,
+          "ports": [
+            "W",
+            "E"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "bend2",
+          "x": 4,
+          "z": 0,
+          "ports": [
+            "W",
+            "S"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "east1",
+          "x": 4,
+          "z": 1,
+          "ports": [
+            "N",
+            "S"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "east2",
+          "x": 4,
+          "z": 2,
+          "ports": [
+            "N",
+            "S"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "station",
+          "x": 4,
+          "z": 3,
+          "ports": [
+            "N"
+          ],
+          "kind": "terminus"
+        },
+        {
+          "id": "works",
+          "x": 3,
+          "z": 2,
+          "ports": [
+            "W",
+            "S"
+          ],
+          "kind": "rail",
+          "blocked": true
+        },
+        {
+          "id": "end",
+          "x": 3,
+          "z": 3,
+          "ports": [
+            "N"
+          ],
+          "kind": "terminus",
+          "end": "dead"
+        }
+      ],
+      "start": {
+        "node": "start",
+        "exit": "E"
+      },
+      "stops": [],
+      "destination": "station",
+      "groups": [],
+      "initial": {
+        "J1": 1
+      },
+      "switches": 1,
+      "independentControls": 1,
+      "settingsChecked": 2,
+      "solutionCount": 1,
+      "canonical": {
+        "J1": 0
+      },
+      "route": [
+        "start",
+        "approach",
+        "J1",
+        "rise",
+        "bend1",
+        "ridge",
+        "bend2",
+        "east1",
+        "east2",
+        "station"
+      ],
+      "routeLength": 10,
+      "outcomes": {
+        "blocked": 1,
+        "success": 1
+      },
+      "failures": [
+        {
+          "settings": {
+            "J1": 1
+          },
+          "reason": "blocked",
+          "at": "works",
+          "objectives": 0,
+          "route": [
+            "start",
+            "approach",
+            "J1",
+            "works"
+          ]
+        }
+      ],
+      "difficulty": "A visibly blocked shortcut invites inspection of a long route. Four curves establish continuous, inspectable port geometry."
+    },
+    {
+      "id": "L04",
+      "name": [
+        "Around We Go",
+        "繞呀繞"
+      ],
+      "chapter": 1,
+      "size": 5,
+      "topology": [
+        {
+          "id": "J1",
+          "x": 1,
+          "z": 1,
+          "ports": [
+            "E",
+            "S",
+            "W"
+          ],
+          "kind": "junction",
+          "stem": "E",
+          "branches": [
+            "S",
+            "W"
+          ],
+          "initial": 0
+        },
+        {
+          "id": "start",
+          "x": 2,
+          "z": 1,
+          "ports": [
+            "W",
+            "E"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_3_1",
+          "x": 3,
+          "z": 1,
+          "ports": [
+            "W",
+            "S"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_3_2",
+          "x": 3,
+          "z": 2,
+          "ports": [
+            "N",
+            "W"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_2_2",
+          "x": 2,
+          "z": 2,
+          "ports": [
+            "E",
+            "W"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_1_2",
+          "x": 1,
+          "z": 2,
+          "ports": [
+            "E",
+            "N"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "station",
+          "x": 0,
+          "z": 1,
+          "ports": [
+            "E"
+          ],
+          "kind": "terminus"
+        }
+      ],
+      "start": {
+        "node": "start",
+        "exit": "W"
+      },
+      "stops": [],
+      "destination": "station",
+      "groups": [],
+      "initial": {
+        "J1": 0
+      },
+      "switches": 1,
+      "independentControls": 1,
+      "settingsChecked": 2,
+      "solutionCount": 1,
+      "canonical": {
+        "J1": 1
+      },
+      "route": [
+        "start",
+        "J1",
+        "station"
+      ],
+      "routeLength": 3,
+      "outcomes": {
+        "loop": 1,
+        "success": 1
+      },
+      "failures": [
+        {
+          "settings": {
+            "J1": 0
+          },
+          "reason": "loop",
+          "at": "J1",
+          "objectives": 0,
+          "route": [
+            "start",
+            "J1",
+            "rail_1_2",
+            "rail_2_2",
+            "rail_3_2",
+            "rail_3_1",
+            "start",
+            "J1"
+          ]
+        }
+      ],
+      "difficulty": "A real reversible cycle with a selectable escape. Starting heading is internal and explicit; the wrong setting has a solver-detected nonproductive loop."
+    },
+    {
+      "id": "L05",
+      "name": [
+        "Junction Master",
+        "轉轍大師"
+      ],
+      "chapter": 1,
+      "size": 5,
+      "topology": [
+        {
+          "id": "J1",
+          "x": 1,
+          "z": 1,
+          "ports": [
+            "E",
+            "S",
+            "W"
+          ],
+          "kind": "junction",
+          "stem": "E",
+          "branches": [
+            "S",
+            "W"
+          ],
+          "initial": 0
+        },
+        {
+          "id": "J2",
+          "x": 0,
+          "z": 1,
+          "ports": [
+            "E",
+            "N",
+            "S"
+          ],
+          "kind": "junction",
+          "stem": "E",
+          "branches": [
+            "N",
+            "S"
+          ],
+          "initial": 1
+        },
+        {
+          "id": "start",
+          "x": 2,
+          "z": 1,
+          "ports": [
+            "W",
+            "E"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_3_1",
+          "x": 3,
+          "z": 1,
+          "ports": [
+            "W",
+            "S"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_3_2",
+          "x": 3,
+          "z": 2,
+          "ports": [
+            "N",
+            "S"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_3_3",
+          "x": 3,
+          "z": 3,
+          "ports": [
+            "N",
+            "W"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_2_3",
+          "x": 2,
+          "z": 3,
+          "ports": [
+            "E",
+            "W"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_1_3",
+          "x": 1,
+          "z": 3,
+          "ports": [
+            "E",
+            "N"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_1_2",
+          "x": 1,
+          "z": 2,
+          "ports": [
+            "S",
+            "N"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "station",
+          "x": 0,
+          "z": 0,
+          "ports": [
+            "S"
+          ],
+          "kind": "terminus"
+        },
+        {
+          "id": "rail_0_2",
+          "x": 0,
+          "z": 2,
+          "ports": [
+            "N",
+            "S"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_0_3",
+          "x": 0,
+          "z": 3,
+          "ports": [
+            "N"
+          ],
+          "kind": "terminus",
+          "blocked": true,
+          "end": "dead"
+        }
+      ],
+      "start": {
+        "node": "start",
+        "exit": "W"
+      },
+      "stops": [],
+      "destination": "station",
+      "groups": [],
+      "initial": {
+        "J1": 0,
+        "J2": 1
+      },
+      "switches": 2,
+      "independentControls": 2,
+      "settingsChecked": 4,
+      "solutionCount": 1,
+      "canonical": {
+        "J1": 1,
+        "J2": 0
+      },
+      "route": [
+        "start",
+        "J1",
+        "J2",
+        "station"
+      ],
+      "routeLength": 4,
+      "outcomes": {
+        "loop": 2,
+        "blocked": 1,
+        "success": 1
+      },
+      "failures": [
+        {
+          "settings": {
+            "J1": 0,
+            "J2": 1
+          },
+          "reason": "loop",
+          "at": "J1",
+          "objectives": 0,
+          "route": [
+            "start",
+            "J1",
+            "rail_1_2",
+            "rail_1_3",
+            "rail_2_3",
+            "rail_3_3",
+            "rail_3_2",
+            "rail_3_1",
+            "start",
+            "J1"
+          ]
+        },
+        {
+          "settings": {
+            "J1": 1,
+            "J2": 1
+          },
+          "reason": "blocked",
+          "at": "rail_0_3",
+          "objectives": 0,
+          "route": [
+            "start",
+            "J1",
+            "J2",
+            "rail_0_2",
+            "rail_0_3"
+          ]
+        },
+        {
+          "settings": {
+            "J1": 0,
+            "J2": 0
+          },
+          "reason": "loop",
+          "at": "J1",
+          "objectives": 0,
+          "route": [
+            "start",
+            "J1",
+            "rail_1_2",
+            "rail_1_3",
+            "rail_2_3",
+            "rail_3_3",
+            "rail_3_2",
+            "rail_3_1",
+            "start",
+            "J1"
+          ]
+        }
+      ],
+      "difficulty": "Chapter-one synthesis: a cycle, a second independent decision and a visibly obstructed siding. Escaping the loop alone is insufficient."
+    },
+    {
+      "id": "L06",
+      "name": [
+        "Riverbend",
+        "河畔彎道"
+      ],
+      "chapter": 2,
+      "size": 6,
+      "topology": [
+        {
+          "id": "J1",
+          "x": 1,
+          "z": 4,
+          "ports": [
+            "W",
+            "N",
+            "E"
+          ],
+          "kind": "junction",
+          "stem": "W",
+          "branches": [
+            "N",
+            "E"
+          ],
+          "initial": 1
+        },
+        {
+          "id": "J2",
+          "x": 4,
+          "z": 2,
+          "ports": [
+            "N",
+            "S",
+            "E"
+          ],
+          "kind": "junction",
+          "stem": "N",
+          "branches": [
+            "E",
+            "S"
+          ],
+          "initial": 0
+        },
+        {
+          "id": "start",
+          "x": 0,
+          "z": 4,
+          "ports": [
+            "E"
+          ],
+          "kind": "terminus",
+          "end": "start"
+        },
+        {
+          "id": "rail_1_3",
+          "x": 1,
+          "z": 3,
+          "ports": [
+            "S",
+            "N"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_1_2",
+          "x": 1,
+          "z": 2,
+          "ports": [
+            "S",
+            "N"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_1_1",
+          "x": 1,
+          "z": 1,
+          "ports": [
+            "S",
+            "E"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_2_1",
+          "x": 2,
+          "z": 1,
+          "ports": [
+            "W",
+            "E"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_3_1",
+          "x": 3,
+          "z": 1,
+          "ports": [
+            "W",
+            "E"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_4_1",
+          "x": 4,
+          "z": 1,
+          "ports": [
+            "W",
+            "S"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_4_3",
+          "x": 4,
+          "z": 3,
+          "ports": [
+            "N",
+            "S"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_4_4",
+          "x": 4,
+          "z": 4,
+          "ports": [
+            "N",
+            "E"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "station",
+          "x": 5,
+          "z": 4,
+          "ports": [
+            "W"
+          ],
+          "kind": "terminus"
+        },
+        {
+          "id": "rail_2_4",
+          "x": 2,
+          "z": 4,
+          "ports": [
+            "W",
+            "E"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_3_4",
+          "x": 3,
+          "z": 4,
+          "ports": [
+            "W"
+          ],
+          "kind": "terminus",
+          "end": "dead"
+        },
+        {
+          "id": "rail_5_2",
+          "x": 5,
+          "z": 2,
+          "ports": [
+            "W"
+          ],
+          "kind": "terminus",
+          "blocked": true,
+          "end": "dead"
+        }
+      ],
+      "start": {
+        "node": "start",
+        "exit": "E"
+      },
+      "stops": [],
+      "destination": "station",
+      "groups": [],
+      "initial": {
+        "J1": 1,
+        "J2": 0
+      },
+      "switches": 2,
+      "independentControls": 2,
+      "settingsChecked": 4,
+      "solutionCount": 1,
+      "canonical": {
+        "J1": 0,
+        "J2": 1
+      },
+      "route": [
+        "start",
+        "J1",
+        "rail_1_3",
+        "rail_1_2",
+        "rail_1_1",
+        "rail_2_1",
+        "rail_3_1",
+        "rail_4_1",
+        "J2",
+        "rail_4_3",
+        "rail_4_4",
+        "station"
+      ],
+      "routeLength": 12,
+      "outcomes": {
+        "dead-end": 2,
+        "blocked": 1,
+        "success": 1
+      },
+      "failures": [
+        {
+          "settings": {
+            "J1": 1,
+            "J2": 0
+          },
+          "reason": "dead-end",
+          "at": "rail_3_4",
+          "objectives": 0,
+          "route": [
+            "start",
+            "J1",
+            "rail_2_4",
+            "rail_3_4"
+          ]
+        },
+        {
+          "settings": {
+            "J1": 0,
+            "J2": 0
+          },
+          "reason": "blocked",
+          "at": "rail_5_2",
+          "objectives": 0,
+          "route": [
+            "start",
+            "J1",
+            "rail_1_3",
+            "rail_1_2",
+            "rail_1_1",
+            "rail_2_1",
+            "rail_3_1",
+            "rail_4_1",
+            "J2",
+            "rail_5_2"
+          ]
+        },
+        {
+          "settings": {
+            "J1": 1,
+            "J2": 1
+          },
+          "reason": "dead-end",
+          "at": "rail_3_4",
+          "objectives": 0,
+          "route": [
+            "start",
+            "J1",
+            "rail_2_4",
+            "rail_3_4"
+          ]
+        }
+      ],
+      "difficulty": "A misleading straight siding contrasts with a long northern detour and a second switch near the destination. Two independent decisions, longer physical inspection."
+    },
+    {
+      "id": "L07",
+      "name": [
+        "Read the Points",
+        "看懂轉轍器"
+      ],
+      "chapter": 2,
+      "size": 6,
+      "topology": [
+        {
+          "id": "J1",
+          "x": 3,
+          "z": 4,
+          "ports": [
+            "E",
+            "N",
+            "W"
+          ],
+          "kind": "junction",
+          "stem": "N",
+          "branches": [
+            "E",
+            "W"
+          ],
+          "initial": 1
+        },
+        {
+          "id": "J2",
+          "x": 1,
+          "z": 1,
+          "ports": [
+            "E",
+            "W",
+            "S"
+          ],
+          "kind": "junction",
+          "stem": "W",
+          "branches": [
+            "E",
+            "S"
+          ],
+          "initial": 1
+        },
+        {
+          "id": "start",
+          "x": 5,
+          "z": 4,
+          "ports": [
+            "W"
+          ],
+          "kind": "terminus",
+          "end": "start"
+        },
+        {
+          "id": "rail_4_4",
+          "x": 4,
+          "z": 4,
+          "ports": [
+            "E",
+            "W"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_3_3",
+          "x": 3,
+          "z": 3,
+          "ports": [
+            "S",
+            "N"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_3_2",
+          "x": 3,
+          "z": 2,
+          "ports": [
+            "S",
+            "N"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_3_1",
+          "x": 3,
+          "z": 1,
+          "ports": [
+            "S",
+            "W"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_2_1",
+          "x": 2,
+          "z": 1,
+          "ports": [
+            "E",
+            "W"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "station",
+          "x": 0,
+          "z": 1,
+          "ports": [
+            "E"
+          ],
+          "kind": "terminus"
+        },
+        {
+          "id": "rail_2_4",
+          "x": 2,
+          "z": 4,
+          "ports": [
+            "E",
+            "W"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_1_4",
+          "x": 1,
+          "z": 4,
+          "ports": [
+            "E"
+          ],
+          "kind": "terminus",
+          "end": "dead"
+        },
+        {
+          "id": "rail_1_2",
+          "x": 1,
+          "z": 2,
+          "ports": [
+            "N",
+            "S"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_1_3",
+          "x": 1,
+          "z": 3,
+          "ports": [
+            "N"
+          ],
+          "kind": "terminus",
+          "blocked": true,
+          "end": "dead"
+        }
+      ],
+      "start": {
+        "node": "start",
+        "exit": "W"
+      },
+      "stops": [],
+      "destination": "station",
+      "groups": [],
+      "initial": {
+        "J1": 1,
+        "J2": 1
+      },
+      "switches": 2,
+      "independentControls": 2,
+      "settingsChecked": 4,
+      "solutionCount": 1,
+      "canonical": {
+        "J1": 0,
+        "J2": 0
+      },
+      "route": [
+        "start",
+        "rail_4_4",
+        "J1",
+        "rail_3_3",
+        "rail_3_2",
+        "rail_3_1",
+        "rail_2_1",
+        "J2",
+        "station"
+      ],
+      "routeLength": 9,
+      "outcomes": {
+        "disconnected": 3,
+        "success": 1
+      },
+      "failures": [
+        {
+          "settings": {
+            "J1": 1,
+            "J2": 1
+          },
+          "reason": "disconnected",
+          "at": "J1",
+          "objectives": 0,
+          "route": [
+            "start",
+            "rail_4_4",
+            "J1"
+          ]
+        },
+        {
+          "settings": {
+            "J1": 0,
+            "J2": 1
+          },
+          "reason": "disconnected",
+          "at": "J2",
+          "objectives": 0,
+          "route": [
+            "start",
+            "rail_4_4",
+            "J1",
+            "rail_3_3",
+            "rail_3_2",
+            "rail_3_1",
+            "rail_2_1",
+            "J2"
+          ]
+        },
+        {
+          "settings": {
+            "J1": 1,
+            "J2": 0
+          },
+          "reason": "disconnected",
+          "at": "J1",
+          "objectives": 0,
+          "route": [
+            "start",
+            "rail_4_4",
+            "J1"
+          ]
+        }
+      ],
+      "difficulty": "Both junctions are approached from their selected branches, exercising reverse traversal and rejecting branch-to-branch shortcuts."
+    },
+    {
+      "id": "L08",
+      "name": [
+        "Post Before Parcels",
+        "先郵件，後包裹"
+      ],
+      "chapter": 2,
+      "size": 6,
+      "topology": [
+        {
+          "id": "J1",
+          "x": 1,
+          "z": 1,
+          "ports": [
+            "W",
+            "E",
+            "S"
+          ],
+          "kind": "junction",
+          "stem": "W",
+          "branches": [
+            "E",
+            "S"
+          ],
+          "initial": 1
+        },
+        {
+          "id": "J2",
+          "x": 2,
+          "z": 3,
+          "ports": [
+            "E",
+            "W",
+            "N"
+          ],
+          "kind": "junction",
+          "stem": "W",
+          "branches": [
+            "E",
+            "N"
+          ],
+          "initial": 1
+        },
+        {
+          "id": "start",
+          "x": 0,
+          "z": 1,
+          "ports": [
+            "E"
+          ],
+          "kind": "terminus",
+          "end": "start"
+        },
+        {
+          "id": "rail_2_1",
+          "x": 2,
+          "z": 1,
+          "ports": [
+            "W",
+            "E"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "stop1",
+          "x": 3,
+          "z": 1,
+          "ports": [
+            "W",
+            "E"
+          ],
+          "kind": "station"
+        },
+        {
+          "id": "rail_4_1",
+          "x": 4,
+          "z": 1,
+          "ports": [
+            "W",
+            "S"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_4_2",
+          "x": 4,
+          "z": 2,
+          "ports": [
+            "N",
+            "S"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_4_3",
+          "x": 4,
+          "z": 3,
+          "ports": [
+            "N",
+            "W"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_3_3",
+          "x": 3,
+          "z": 3,
+          "ports": [
+            "E",
+            "W"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "stop2",
+          "x": 1,
+          "z": 3,
+          "ports": [
+            "E",
+            "W"
+          ],
+          "kind": "station"
+        },
+        {
+          "id": "station",
+          "x": 0,
+          "z": 3,
+          "ports": [
+            "E"
+          ],
+          "kind": "terminus"
+        },
+        {
+          "id": "rail_1_2",
+          "x": 1,
+          "z": 2,
+          "ports": [
+            "N",
+            "E"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_2_2",
+          "x": 2,
+          "z": 2,
+          "ports": [
+            "W",
+            "S"
+          ],
+          "kind": "rail"
+        }
+      ],
+      "start": {
+        "node": "start",
+        "exit": "E"
+      },
+      "stops": [
+        "stop1",
+        "stop2"
+      ],
+      "destination": "station",
+      "groups": [],
+      "initial": {
+        "J1": 1,
+        "J2": 1
+      },
+      "switches": 2,
+      "independentControls": 2,
+      "settingsChecked": 4,
+      "solutionCount": 1,
+      "canonical": {
+        "J1": 0,
+        "J2": 0
+      },
+      "route": [
+        "start",
+        "J1",
+        "rail_2_1",
+        "stop1",
+        "rail_4_1",
+        "rail_4_2",
+        "rail_4_3",
+        "rail_3_3",
+        "J2",
+        "stop2",
+        "station"
+      ],
+      "routeLength": 11,
+      "outcomes": {
+        "wrong-order": 1,
+        "disconnected": 2,
+        "success": 1
+      },
+      "failures": [
+        {
+          "settings": {
+            "J1": 1,
+            "J2": 1
+          },
+          "reason": "wrong-order",
+          "at": "stop2",
+          "objectives": 0,
+          "route": [
+            "start",
+            "J1",
+            "rail_1_2",
+            "rail_2_2",
+            "J2",
+            "stop2"
+          ]
+        },
+        {
+          "settings": {
+            "J1": 0,
+            "J2": 1
+          },
+          "reason": "disconnected",
+          "at": "J2",
+          "objectives": 1,
+          "route": [
+            "start",
+            "J1",
+            "rail_2_1",
+            "stop1",
+            "rail_4_1",
+            "rail_4_2",
+            "rail_4_3",
+            "rail_3_3",
+            "J2"
+          ]
+        },
+        {
+          "settings": {
+            "J1": 1,
+            "J2": 0
+          },
+          "reason": "disconnected",
+          "at": "J2",
+          "objectives": 0,
+          "route": [
+            "start",
+            "J1",
+            "rail_1_2",
+            "rail_2_2",
+            "J2"
+          ]
+        }
+      ],
+      "difficulty": "The short path reaches the second required stop first. Correctly connected switches can therefore fail on objective order, not just connectivity."
+    },
+    {
+      "id": "L09",
+      "name": [
+        "A Second Look",
+        "再看一眼"
+      ],
+      "chapter": 2,
+      "size": 6,
+      "topology": [
+        {
+          "id": "J1",
+          "x": 4,
+          "z": 3,
+          "ports": [
+            "N",
+            "S",
+            "W"
+          ],
+          "kind": "junction",
+          "stem": "N",
+          "branches": [
+            "W",
+            "S"
+          ],
+          "initial": 1
+        },
+        {
+          "id": "J2",
+          "x": 1,
+          "z": 4,
+          "ports": [
+            "E",
+            "N",
+            "W"
+          ],
+          "kind": "junction",
+          "stem": "E",
+          "branches": [
+            "N",
+            "W"
+          ],
+          "initial": 0
+        },
+        {
+          "id": "rail_1_1",
+          "x": 1,
+          "z": 1,
+          "ports": [
+            "E",
+            "S"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "start",
+          "x": 2,
+          "z": 1,
+          "ports": [
+            "W",
+            "E"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_3_1",
+          "x": 3,
+          "z": 1,
+          "ports": [
+            "W",
+            "E"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_4_1",
+          "x": 4,
+          "z": 1,
+          "ports": [
+            "W",
+            "S"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "scenic1",
+          "x": 4,
+          "z": 2,
+          "ports": [
+            "N",
+            "S"
+          ],
+          "kind": "station"
+        },
+        {
+          "id": "rail_4_4",
+          "x": 4,
+          "z": 4,
+          "ports": [
+            "N",
+            "W"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_3_4",
+          "x": 3,
+          "z": 4,
+          "ports": [
+            "E",
+            "W"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "stop1",
+          "x": 2,
+          "z": 4,
+          "ports": [
+            "E",
+            "W"
+          ],
+          "kind": "station"
+        },
+        {
+          "id": "rail_1_3",
+          "x": 1,
+          "z": 3,
+          "ports": [
+            "S",
+            "N"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_1_2",
+          "x": 1,
+          "z": 2,
+          "ports": [
+            "S",
+            "N"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "station",
+          "x": 0,
+          "z": 4,
+          "ports": [
+            "E"
+          ],
+          "kind": "terminus"
+        },
+        {
+          "id": "rail_3_3",
+          "x": 3,
+          "z": 3,
+          "ports": [
+            "E",
+            "W"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_2_3",
+          "x": 2,
+          "z": 3,
+          "ports": [
+            "E",
+            "N"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_2_2",
+          "x": 2,
+          "z": 2,
+          "ports": [
+            "S"
+          ],
+          "kind": "terminus",
+          "blocked": true,
+          "end": "dead"
+        }
+      ],
+      "start": {
+        "node": "start",
+        "exit": "E"
+      },
+      "stops": [
+        "stop1"
+      ],
+      "destination": "station",
+      "groups": [],
+      "initial": {
+        "J1": 1,
+        "J2": 0
+      },
+      "switches": 2,
+      "independentControls": 2,
+      "settingsChecked": 4,
+      "solutionCount": 1,
+      "canonical": {
+        "J1": 1,
+        "J2": 1
+      },
+      "route": [
+        "start",
+        "rail_3_1",
+        "rail_4_1",
+        "scenic1",
+        "J1",
+        "rail_4_4",
+        "rail_3_4",
+        "stop1",
+        "J2",
+        "station"
+      ],
+      "routeLength": 10,
+      "outcomes": {
+        "loop": 1,
+        "blocked": 2,
+        "success": 1
+      },
+      "failures": [
+        {
+          "settings": {
+            "J1": 1,
+            "J2": 0
+          },
+          "reason": "loop",
+          "at": "stop1",
+          "objectives": 1,
+          "route": [
+            "start",
+            "rail_3_1",
+            "rail_4_1",
+            "scenic1",
+            "J1",
+            "rail_4_4",
+            "rail_3_4",
+            "stop1",
+            "J2",
+            "rail_1_3",
+            "rail_1_2",
+            "rail_1_1",
+            "start",
+            "rail_3_1",
+            "rail_4_1",
+            "scenic1",
+            "J1",
+            "rail_4_4",
+            "rail_3_4",
+            "stop1"
+          ]
+        },
+        {
+          "settings": {
+            "J1": 0,
+            "J2": 0
+          },
+          "reason": "blocked",
+          "at": "rail_2_2",
+          "objectives": 0,
+          "route": [
+            "start",
+            "rail_3_1",
+            "rail_4_1",
+            "scenic1",
+            "J1",
+            "rail_3_3",
+            "rail_2_3",
+            "rail_2_2"
+          ]
+        },
+        {
+          "settings": {
+            "J1": 0,
+            "J2": 1
+          },
+          "reason": "blocked",
+          "at": "rail_2_2",
+          "objectives": 0,
+          "route": [
+            "start",
+            "rail_3_1",
+            "rail_4_1",
+            "scenic1",
+            "J1",
+            "rail_3_3",
+            "rail_2_3",
+            "rail_2_2"
+          ]
+        }
+      ],
+      "difficulty": "Objective-aware loop detection: the wrong configuration makes objective progress before revisiting rails; only a repeated complete directed state fails. An ordinary station is pass-through."
+    },
+    {
+      "id": "L10",
+      "name": [
+        "The Valley Round",
+        "山谷巡禮"
+      ],
+      "chapter": 2,
+      "size": 6,
+      "topology": [
+        {
+          "id": "J1",
+          "x": 1,
+          "z": 5,
+          "ports": [
+            "W",
+            "N",
+            "E"
+          ],
+          "kind": "junction",
+          "stem": "W",
+          "branches": [
+            "N",
+            "E"
+          ],
+          "initial": 0
+        },
+        {
+          "id": "J2",
+          "x": 4,
+          "z": 1,
+          "ports": [
+            "W",
+            "S",
+            "N"
+          ],
+          "kind": "junction",
+          "stem": "W",
+          "branches": [
+            "N",
+            "S"
+          ],
+          "initial": 0
+        },
+        {
+          "id": "J3",
+          "x": 3,
+          "z": 3,
+          "ports": [
+            "E",
+            "S",
+            "N"
+          ],
+          "kind": "junction",
+          "stem": "E",
+          "branches": [
+            "N",
+            "S"
+          ],
+          "initial": 1
+        },
+        {
+          "id": "J4",
+          "x": 4,
+          "z": 0,
+          "ports": [
+            "E",
+            "W",
+            "S"
+          ],
+          "kind": "junction",
+          "stem": "W",
+          "branches": [
+            "E",
+            "S"
+          ],
+          "initial": 1
+        },
+        {
+          "id": "start",
+          "x": 0,
+          "z": 5,
+          "ports": [
+            "E"
+          ],
+          "kind": "terminus",
+          "end": "start"
+        },
+        {
+          "id": "rail_1_4",
+          "x": 1,
+          "z": 4,
+          "ports": [
+            "S",
+            "N"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_1_3",
+          "x": 1,
+          "z": 3,
+          "ports": [
+            "S",
+            "N"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "stop1",
+          "x": 1,
+          "z": 2,
+          "ports": [
+            "S",
+            "N"
+          ],
+          "kind": "station"
+        },
+        {
+          "id": "rail_1_1",
+          "x": 1,
+          "z": 1,
+          "ports": [
+            "S",
+            "E"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_2_1",
+          "x": 2,
+          "z": 1,
+          "ports": [
+            "W",
+            "E"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "stop2",
+          "x": 3,
+          "z": 1,
+          "ports": [
+            "W",
+            "E"
+          ],
+          "kind": "station"
+        },
+        {
+          "id": "rail_4_2",
+          "x": 4,
+          "z": 2,
+          "ports": [
+            "N",
+            "S"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_4_3",
+          "x": 4,
+          "z": 3,
+          "ports": [
+            "N",
+            "W"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_3_4",
+          "x": 3,
+          "z": 4,
+          "ports": [
+            "N",
+            "S"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_3_5",
+          "x": 3,
+          "z": 5,
+          "ports": [
+            "N",
+            "E"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_4_5",
+          "x": 4,
+          "z": 5,
+          "ports": [
+            "W",
+            "E"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_5_5",
+          "x": 5,
+          "z": 5,
+          "ports": [
+            "W",
+            "N"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_5_4",
+          "x": 5,
+          "z": 4,
+          "ports": [
+            "S",
+            "N"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "stop3",
+          "x": 5,
+          "z": 3,
+          "ports": [
+            "S",
+            "N"
+          ],
+          "kind": "station"
+        },
+        {
+          "id": "rail_5_2",
+          "x": 5,
+          "z": 2,
+          "ports": [
+            "S",
+            "N"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_5_1",
+          "x": 5,
+          "z": 1,
+          "ports": [
+            "S",
+            "N"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_5_0",
+          "x": 5,
+          "z": 0,
+          "ports": [
+            "S",
+            "W"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_3_0",
+          "x": 3,
+          "z": 0,
+          "ports": [
+            "E",
+            "W"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_2_0",
+          "x": 2,
+          "z": 0,
+          "ports": [
+            "E",
+            "W"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_1_0",
+          "x": 1,
+          "z": 0,
+          "ports": [
+            "E",
+            "W"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "station",
+          "x": 0,
+          "z": 0,
+          "ports": [
+            "E"
+          ],
+          "kind": "terminus"
+        },
+        {
+          "id": "rail_2_5",
+          "x": 2,
+          "z": 5,
+          "ports": [
+            "W"
+          ],
+          "kind": "terminus",
+          "end": "dead"
+        },
+        {
+          "id": "rail_3_2",
+          "x": 3,
+          "z": 2,
+          "ports": [
+            "S"
+          ],
+          "kind": "terminus",
+          "blocked": true,
+          "end": "dead"
+        }
+      ],
+      "start": {
+        "node": "start",
+        "exit": "E"
+      },
+      "stops": [
+        "stop1",
+        "stop2",
+        "stop3"
+      ],
+      "destination": "station",
+      "groups": [],
+      "initial": {
+        "J1": 0,
+        "J2": 0,
+        "J3": 1,
+        "J4": 1
+      },
+      "switches": 4,
+      "independentControls": 4,
+      "settingsChecked": 16,
+      "solutionCount": 1,
+      "canonical": {
+        "J1": 0,
+        "J2": 1,
+        "J3": 1,
+        "J4": 0
+      },
+      "route": [
+        "start",
+        "J1",
+        "rail_1_4",
+        "rail_1_3",
+        "stop1",
+        "rail_1_1",
+        "rail_2_1",
+        "stop2",
+        "J2",
+        "rail_4_2",
+        "rail_4_3",
+        "J3",
+        "rail_3_4",
+        "rail_3_5",
+        "rail_4_5",
+        "rail_5_5",
+        "rail_5_4",
+        "stop3",
+        "rail_5_2",
+        "rail_5_1",
+        "rail_5_0",
+        "J4",
+        "rail_3_0",
+        "rail_2_0",
+        "rail_1_0",
+        "station"
+      ],
+      "routeLength": 26,
+      "outcomes": {
+        "early-terminal": 2,
+        "dead-end": 8,
+        "disconnected": 3,
+        "blocked": 2,
+        "success": 1
+      },
+      "failures": [
+        {
+          "settings": {
+            "J1": 0,
+            "J2": 0,
+            "J3": 1,
+            "J4": 1
+          },
+          "reason": "early-terminal",
+          "at": "station",
+          "objectives": 2,
+          "route": [
+            "start",
+            "J1",
+            "rail_1_4",
+            "rail_1_3",
+            "stop1",
+            "rail_1_1",
+            "rail_2_1",
+            "stop2",
+            "J2",
+            "J4",
+            "rail_3_0",
+            "rail_2_0",
+            "rail_1_0",
+            "station"
+          ]
+        },
+        {
+          "settings": {
+            "J1": 1,
+            "J2": 0,
+            "J3": 1,
+            "J4": 1
+          },
+          "reason": "dead-end",
+          "at": "rail_2_5",
+          "objectives": 0,
+          "route": [
+            "start",
+            "J1",
+            "rail_2_5"
+          ]
+        },
+        {
+          "settings": {
+            "J1": 0,
+            "J2": 1,
+            "J3": 1,
+            "J4": 1
+          },
+          "reason": "disconnected",
+          "at": "J4",
+          "objectives": 3,
+          "route": [
+            "start",
+            "J1",
+            "rail_1_4",
+            "rail_1_3",
+            "stop1",
+            "rail_1_1",
+            "rail_2_1",
+            "stop2",
+            "J2",
+            "rail_4_2",
+            "rail_4_3",
+            "J3",
+            "rail_3_4",
+            "rail_3_5",
+            "rail_4_5",
+            "rail_5_5",
+            "rail_5_4",
+            "stop3",
+            "rail_5_2",
+            "rail_5_1",
+            "rail_5_0",
+            "J4"
+          ]
+        },
+        {
+          "settings": {
+            "J1": 1,
+            "J2": 1,
+            "J3": 1,
+            "J4": 1
+          },
+          "reason": "dead-end",
+          "at": "rail_2_5",
+          "objectives": 0,
+          "route": [
+            "start",
+            "J1",
+            "rail_2_5"
+          ]
+        },
+        {
+          "settings": {
+            "J1": 0,
+            "J2": 0,
+            "J3": 0,
+            "J4": 1
+          },
+          "reason": "early-terminal",
+          "at": "station",
+          "objectives": 2,
+          "route": [
+            "start",
+            "J1",
+            "rail_1_4",
+            "rail_1_3",
+            "stop1",
+            "rail_1_1",
+            "rail_2_1",
+            "stop2",
+            "J2",
+            "J4",
+            "rail_3_0",
+            "rail_2_0",
+            "rail_1_0",
+            "station"
+          ]
+        },
+        {
+          "settings": {
+            "J1": 1,
+            "J2": 0,
+            "J3": 0,
+            "J4": 1
+          },
+          "reason": "dead-end",
+          "at": "rail_2_5",
+          "objectives": 0,
+          "route": [
+            "start",
+            "J1",
+            "rail_2_5"
+          ]
+        },
+        {
+          "settings": {
+            "J1": 0,
+            "J2": 1,
+            "J3": 0,
+            "J4": 1
+          },
+          "reason": "blocked",
+          "at": "rail_3_2",
+          "objectives": 2,
+          "route": [
+            "start",
+            "J1",
+            "rail_1_4",
+            "rail_1_3",
+            "stop1",
+            "rail_1_1",
+            "rail_2_1",
+            "stop2",
+            "J2",
+            "rail_4_2",
+            "rail_4_3",
+            "J3",
+            "rail_3_2"
+          ]
+        },
+        {
+          "settings": {
+            "J1": 1,
+            "J2": 1,
+            "J3": 0,
+            "J4": 1
+          },
+          "reason": "dead-end",
+          "at": "rail_2_5",
+          "objectives": 0,
+          "route": [
+            "start",
+            "J1",
+            "rail_2_5"
+          ]
+        },
+        {
+          "settings": {
+            "J1": 0,
+            "J2": 0,
+            "J3": 1,
+            "J4": 0
+          },
+          "reason": "disconnected",
+          "at": "J4",
+          "objectives": 2,
+          "route": [
+            "start",
+            "J1",
+            "rail_1_4",
+            "rail_1_3",
+            "stop1",
+            "rail_1_1",
+            "rail_2_1",
+            "stop2",
+            "J2",
+            "J4"
+          ]
+        },
+        {
+          "settings": {
+            "J1": 1,
+            "J2": 0,
+            "J3": 1,
+            "J4": 0
+          },
+          "reason": "dead-end",
+          "at": "rail_2_5",
+          "objectives": 0,
+          "route": [
+            "start",
+            "J1",
+            "rail_2_5"
+          ]
+        },
+        {
+          "settings": {
+            "J1": 1,
+            "J2": 1,
+            "J3": 1,
+            "J4": 0
+          },
+          "reason": "dead-end",
+          "at": "rail_2_5",
+          "objectives": 0,
+          "route": [
+            "start",
+            "J1",
+            "rail_2_5"
+          ]
+        },
+        {
+          "settings": {
+            "J1": 0,
+            "J2": 0,
+            "J3": 0,
+            "J4": 0
+          },
+          "reason": "disconnected",
+          "at": "J4",
+          "objectives": 2,
+          "route": [
+            "start",
+            "J1",
+            "rail_1_4",
+            "rail_1_3",
+            "stop1",
+            "rail_1_1",
+            "rail_2_1",
+            "stop2",
+            "J2",
+            "J4"
+          ]
+        },
+        {
+          "settings": {
+            "J1": 1,
+            "J2": 0,
+            "J3": 0,
+            "J4": 0
+          },
+          "reason": "dead-end",
+          "at": "rail_2_5",
+          "objectives": 0,
+          "route": [
+            "start",
+            "J1",
+            "rail_2_5"
+          ]
+        },
+        {
+          "settings": {
+            "J1": 0,
+            "J2": 1,
+            "J3": 0,
+            "J4": 0
+          },
+          "reason": "blocked",
+          "at": "rail_3_2",
+          "objectives": 2,
+          "route": [
+            "start",
+            "J1",
+            "rail_1_4",
+            "rail_1_3",
+            "stop1",
+            "rail_1_1",
+            "rail_2_1",
+            "stop2",
+            "J2",
+            "rail_4_2",
+            "rail_4_3",
+            "J3",
+            "rail_3_2"
+          ]
+        },
+        {
+          "settings": {
+            "J1": 1,
+            "J2": 1,
+            "J3": 0,
+            "J4": 0
+          },
+          "reason": "dead-end",
+          "at": "rail_2_5",
+          "objectives": 0,
+          "route": [
+            "start",
+            "J1",
+            "rail_2_5"
+          ]
+        }
+      ],
+      "difficulty": "Chapter-two synthesis: four independent switches, a blocked branch, a tempting premature terminus and three ordered stops along a long outer route."
+    },
+    {
+      "id": "L11",
+      "name": [
+        "Better Together",
+        "一起轉動"
+      ],
+      "chapter": 3,
+      "size": 7,
+      "topology": [
+        {
+          "id": "J1",
+          "x": 1,
+          "z": 5,
+          "ports": [
+            "W",
+            "N",
+            "E"
+          ],
+          "kind": "junction",
+          "stem": "W",
+          "branches": [
+            "N",
+            "E"
+          ],
+          "initial": 1
+        },
+        {
+          "id": "J2",
+          "x": 5,
+          "z": 3,
+          "ports": [
+            "N",
+            "S",
+            "W"
+          ],
+          "kind": "junction",
+          "stem": "N",
+          "branches": [
+            "S",
+            "W"
+          ],
+          "initial": 1
+        },
+        {
+          "id": "start",
+          "x": 0,
+          "z": 5,
+          "ports": [
+            "E"
+          ],
+          "kind": "terminus",
+          "end": "start"
+        },
+        {
+          "id": "rail_1_4",
+          "x": 1,
+          "z": 4,
+          "ports": [
+            "S",
+            "N"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_1_3",
+          "x": 1,
+          "z": 3,
+          "ports": [
+            "S",
+            "N"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_1_2",
+          "x": 1,
+          "z": 2,
+          "ports": [
+            "S",
+            "N"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_1_1",
+          "x": 1,
+          "z": 1,
+          "ports": [
+            "S",
+            "E"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_2_1",
+          "x": 2,
+          "z": 1,
+          "ports": [
+            "W",
+            "E"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "stop1",
+          "x": 3,
+          "z": 1,
+          "ports": [
+            "W",
+            "E"
+          ],
+          "kind": "station"
+        },
+        {
+          "id": "rail_4_1",
+          "x": 4,
+          "z": 1,
+          "ports": [
+            "W",
+            "E"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_5_1",
+          "x": 5,
+          "z": 1,
+          "ports": [
+            "W",
+            "S"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_5_2",
+          "x": 5,
+          "z": 2,
+          "ports": [
+            "N",
+            "S"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_5_4",
+          "x": 5,
+          "z": 4,
+          "ports": [
+            "N",
+            "S"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_5_5",
+          "x": 5,
+          "z": 5,
+          "ports": [
+            "N",
+            "E"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "station",
+          "x": 6,
+          "z": 5,
+          "ports": [
+            "W"
+          ],
+          "kind": "terminus"
+        },
+        {
+          "id": "rail_2_5",
+          "x": 2,
+          "z": 5,
+          "ports": [
+            "W",
+            "E"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_3_5",
+          "x": 3,
+          "z": 5,
+          "ports": [
+            "W"
+          ],
+          "kind": "terminus",
+          "end": "dead"
+        },
+        {
+          "id": "rail_4_3",
+          "x": 4,
+          "z": 3,
+          "ports": [
+            "E",
+            "W"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_3_3",
+          "x": 3,
+          "z": 3,
+          "ports": [
+            "E"
+          ],
+          "kind": "terminus",
+          "blocked": true,
+          "end": "dead"
+        }
+      ],
+      "start": {
+        "node": "start",
+        "exit": "E"
+      },
+      "stops": [
+        "stop1"
+      ],
+      "destination": "station",
+      "groups": [
+        [
+          "J1",
+          "J2"
+        ]
+      ],
+      "initial": {
+        "J1": 1,
+        "J2": 1
+      },
+      "switches": 2,
+      "independentControls": 1,
+      "settingsChecked": 2,
+      "solutionCount": 1,
+      "canonical": {
+        "J1": 0,
+        "J2": 0
+      },
+      "route": [
+        "start",
+        "J1",
+        "rail_1_4",
+        "rail_1_3",
+        "rail_1_2",
+        "rail_1_1",
+        "rail_2_1",
+        "stop1",
+        "rail_4_1",
+        "rail_5_1",
+        "rail_5_2",
+        "J2",
+        "rail_5_4",
+        "rail_5_5",
+        "station"
+      ],
+      "routeLength": 15,
+      "outcomes": {
+        "dead-end": 1,
+        "success": 1
+      },
+      "failures": [
+        {
+          "settings": {
+            "J1": 1,
+            "J2": 1
+          },
+          "reason": "dead-end",
+          "at": "rail_3_5",
+          "objectives": 0,
+          "route": [
+            "start",
+            "J1",
+            "rail_2_5",
+            "rail_3_5"
+          ]
+        }
+      ],
+      "difficulty": "Introduces one clearly marked two-member mechanical group. The same transaction opens the northern detour and the station approach."
+    },
+    {
+      "id": "L12",
+      "name": [
+        "Opposite Signals",
+        "相反的號誌"
+      ],
+      "chapter": 3,
+      "size": 7,
+      "topology": [
+        {
+          "id": "J1",
+          "x": 4,
+          "z": 5,
+          "ports": [
+            "E",
+            "W",
+            "N"
+          ],
+          "kind": "junction",
+          "stem": "W",
+          "branches": [
+            "E",
+            "N"
+          ],
+          "initial": 1
+        },
+        {
+          "id": "J2",
+          "x": 4,
+          "z": 1,
+          "ports": [
+            "W",
+            "E",
+            "S"
+          ],
+          "kind": "junction",
+          "stem": "W",
+          "branches": [
+            "S",
+            "E"
+          ],
+          "initial": 0
+        },
+        {
+          "id": "start",
+          "x": 6,
+          "z": 5,
+          "ports": [
+            "W"
+          ],
+          "kind": "terminus",
+          "end": "start"
+        },
+        {
+          "id": "rail_5_5",
+          "x": 5,
+          "z": 5,
+          "ports": [
+            "E",
+            "W"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_3_5",
+          "x": 3,
+          "z": 5,
+          "ports": [
+            "E",
+            "W"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_2_5",
+          "x": 2,
+          "z": 5,
+          "ports": [
+            "E",
+            "W"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_1_5",
+          "x": 1,
+          "z": 5,
+          "ports": [
+            "E",
+            "N"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_1_4",
+          "x": 1,
+          "z": 4,
+          "ports": [
+            "S",
+            "N"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "stop1",
+          "x": 1,
+          "z": 3,
+          "ports": [
+            "S",
+            "N"
+          ],
+          "kind": "station"
+        },
+        {
+          "id": "rail_1_2",
+          "x": 1,
+          "z": 2,
+          "ports": [
+            "S",
+            "N"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_1_1",
+          "x": 1,
+          "z": 1,
+          "ports": [
+            "S",
+            "E"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_2_1",
+          "x": 2,
+          "z": 1,
+          "ports": [
+            "W",
+            "E"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_3_1",
+          "x": 3,
+          "z": 1,
+          "ports": [
+            "W",
+            "E"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_5_1",
+          "x": 5,
+          "z": 1,
+          "ports": [
+            "W",
+            "E"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "station",
+          "x": 6,
+          "z": 1,
+          "ports": [
+            "W"
+          ],
+          "kind": "terminus"
+        },
+        {
+          "id": "rail_4_4",
+          "x": 4,
+          "z": 4,
+          "ports": [
+            "S",
+            "N"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_4_3",
+          "x": 4,
+          "z": 3,
+          "ports": [
+            "S",
+            "N"
+          ],
+          "kind": "rail",
+          "blocked": true
+        },
+        {
+          "id": "rail_4_2",
+          "x": 4,
+          "z": 2,
+          "ports": [
+            "S",
+            "N"
+          ],
+          "kind": "rail"
+        }
+      ],
+      "start": {
+        "node": "start",
+        "exit": "W"
+      },
+      "stops": [
+        "stop1"
+      ],
+      "destination": "station",
+      "groups": [
+        [
+          "J1",
+          "J2"
+        ]
+      ],
+      "initial": {
+        "J1": 1,
+        "J2": 0
+      },
+      "switches": 2,
+      "independentControls": 1,
+      "settingsChecked": 2,
+      "solutionCount": 1,
+      "canonical": {
+        "J1": 0,
+        "J2": 1
+      },
+      "route": [
+        "start",
+        "rail_5_5",
+        "J1",
+        "rail_3_5",
+        "rail_2_5",
+        "rail_1_5",
+        "rail_1_4",
+        "stop1",
+        "rail_1_2",
+        "rail_1_1",
+        "rail_2_1",
+        "rail_3_1",
+        "J2",
+        "rail_5_1",
+        "station"
+      ],
+      "routeLength": 15,
+      "outcomes": {
+        "disconnected": 1,
+        "success": 1
+      },
+      "failures": [
+        {
+          "settings": {
+            "J1": 1,
+            "J2": 0
+          },
+          "reason": "disconnected",
+          "at": "J1",
+          "objectives": 0,
+          "route": [
+            "start",
+            "rail_5_5",
+            "J1"
+          ]
+        }
+      ],
+      "difficulty": "Opposite initial phases in a linked pair, selected-branch entry, and a visibly blocked central cross-connection. The group is atomic but its members face different ways."
+    },
+    {
+      "id": "L13",
+      "name": [
+        "Two in Tandem",
+        "兩組默契"
+      ],
+      "chapter": 3,
+      "size": 7,
+      "topology": [
+        {
+          "id": "J1",
+          "x": 1,
+          "z": 6,
+          "ports": [
+            "W",
+            "N",
+            "E"
+          ],
+          "kind": "junction",
+          "stem": "W",
+          "branches": [
+            "N",
+            "E"
+          ],
+          "initial": 1
+        },
+        {
+          "id": "J2",
+          "x": 3,
+          "z": 1,
+          "ports": [
+            "W",
+            "E",
+            "S"
+          ],
+          "kind": "junction",
+          "stem": "W",
+          "branches": [
+            "E",
+            "S"
+          ],
+          "initial": 1
+        },
+        {
+          "id": "J3",
+          "x": 5,
+          "z": 3,
+          "ports": [
+            "N",
+            "S",
+            "W"
+          ],
+          "kind": "junction",
+          "stem": "N",
+          "branches": [
+            "S",
+            "W"
+          ],
+          "initial": 1
+        },
+        {
+          "id": "J4",
+          "x": 3,
+          "z": 5,
+          "ports": [
+            "E",
+            "W",
+            "N"
+          ],
+          "kind": "junction",
+          "stem": "E",
+          "branches": [
+            "N",
+            "W"
+          ],
+          "initial": 0
+        },
+        {
+          "id": "start",
+          "x": 0,
+          "z": 6,
+          "ports": [
+            "E"
+          ],
+          "kind": "terminus",
+          "end": "start"
+        },
+        {
+          "id": "rail_1_5",
+          "x": 1,
+          "z": 5,
+          "ports": [
+            "S",
+            "N"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_1_4",
+          "x": 1,
+          "z": 4,
+          "ports": [
+            "S",
+            "N"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "stop1",
+          "x": 1,
+          "z": 3,
+          "ports": [
+            "S",
+            "N"
+          ],
+          "kind": "station"
+        },
+        {
+          "id": "rail_1_2",
+          "x": 1,
+          "z": 2,
+          "ports": [
+            "S",
+            "N"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_1_1",
+          "x": 1,
+          "z": 1,
+          "ports": [
+            "S",
+            "E"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_2_1",
+          "x": 2,
+          "z": 1,
+          "ports": [
+            "W",
+            "E"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "stop2",
+          "x": 4,
+          "z": 1,
+          "ports": [
+            "W",
+            "E"
+          ],
+          "kind": "station"
+        },
+        {
+          "id": "rail_5_1",
+          "x": 5,
+          "z": 1,
+          "ports": [
+            "W",
+            "S"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_5_2",
+          "x": 5,
+          "z": 2,
+          "ports": [
+            "N",
+            "S"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_5_4",
+          "x": 5,
+          "z": 4,
+          "ports": [
+            "N",
+            "S"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_5_5",
+          "x": 5,
+          "z": 5,
+          "ports": [
+            "N",
+            "W"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_4_5",
+          "x": 4,
+          "z": 5,
+          "ports": [
+            "E",
+            "W"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "station",
+          "x": 2,
+          "z": 5,
+          "ports": [
+            "E"
+          ],
+          "kind": "terminus"
+        },
+        {
+          "id": "rail_2_6",
+          "x": 2,
+          "z": 6,
+          "ports": [
+            "W",
+            "E"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_3_6",
+          "x": 3,
+          "z": 6,
+          "ports": [
+            "W"
+          ],
+          "kind": "terminus",
+          "end": "dead"
+        },
+        {
+          "id": "rail_3_2",
+          "x": 3,
+          "z": 2,
+          "ports": [
+            "N",
+            "S"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_3_3",
+          "x": 3,
+          "z": 3,
+          "ports": [
+            "N",
+            "E"
+          ],
+          "kind": "rail",
+          "blocked": true
+        },
+        {
+          "id": "rail_4_3",
+          "x": 4,
+          "z": 3,
+          "ports": [
+            "W",
+            "E"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_3_4",
+          "x": 3,
+          "z": 4,
+          "ports": [
+            "S"
+          ],
+          "kind": "terminus",
+          "blocked": true,
+          "end": "dead"
+        }
+      ],
+      "start": {
+        "node": "start",
+        "exit": "E"
+      },
+      "stops": [
+        "stop1",
+        "stop2"
+      ],
+      "destination": "station",
+      "groups": [
+        [
+          "J1",
+          "J3"
+        ],
+        [
+          "J2",
+          "J4"
+        ]
+      ],
+      "initial": {
+        "J1": 1,
+        "J2": 1,
+        "J3": 1,
+        "J4": 0
+      },
+      "switches": 4,
+      "independentControls": 2,
+      "settingsChecked": 4,
+      "solutionCount": 1,
+      "canonical": {
+        "J1": 0,
+        "J2": 0,
+        "J3": 0,
+        "J4": 1
+      },
+      "route": [
+        "start",
+        "J1",
+        "rail_1_5",
+        "rail_1_4",
+        "stop1",
+        "rail_1_2",
+        "rail_1_1",
+        "rail_2_1",
+        "J2",
+        "stop2",
+        "rail_5_1",
+        "rail_5_2",
+        "J3",
+        "rail_5_4",
+        "rail_5_5",
+        "rail_4_5",
+        "J4",
+        "station"
+      ],
+      "routeLength": 18,
+      "outcomes": {
+        "dead-end": 2,
+        "blocked": 1,
+        "success": 1
+      },
+      "failures": [
+        {
+          "settings": {
+            "J1": 1,
+            "J2": 1,
+            "J3": 1,
+            "J4": 0
+          },
+          "reason": "dead-end",
+          "at": "rail_3_6",
+          "objectives": 0,
+          "route": [
+            "start",
+            "J1",
+            "rail_2_6",
+            "rail_3_6"
+          ]
+        },
+        {
+          "settings": {
+            "J1": 0,
+            "J2": 1,
+            "J3": 0,
+            "J4": 0
+          },
+          "reason": "blocked",
+          "at": "rail_3_3",
+          "objectives": 1,
+          "route": [
+            "start",
+            "J1",
+            "rail_1_5",
+            "rail_1_4",
+            "stop1",
+            "rail_1_2",
+            "rail_1_1",
+            "rail_2_1",
+            "J2",
+            "rail_3_2",
+            "rail_3_3"
+          ]
+        },
+        {
+          "settings": {
+            "J1": 1,
+            "J2": 0,
+            "J3": 1,
+            "J4": 1
+          },
+          "reason": "dead-end",
+          "at": "rail_3_6",
+          "objectives": 0,
+          "route": [
+            "start",
+            "J1",
+            "rail_2_6",
+            "rail_3_6"
+          ]
+        }
+      ],
+      "difficulty": "Two independent linked groups with different phases. Four visible junctions affect two decisions, ordered deliveries and a blocked internal connection."
+    },
+    {
+      "id": "L14",
+      "name": [
+        "Shared Horizons",
+        "共同的遠方"
+      ],
+      "chapter": 3,
+      "size": 7,
+      "topology": [
+        {
+          "id": "J1",
+          "x": 1,
+          "z": 6,
+          "ports": [
+            "W",
+            "N",
+            "E"
+          ],
+          "kind": "junction",
+          "stem": "W",
+          "branches": [
+            "N",
+            "E"
+          ],
+          "initial": 1
+        },
+        {
+          "id": "J2",
+          "x": 3,
+          "z": 2,
+          "ports": [
+            "W",
+            "S",
+            "E"
+          ],
+          "kind": "junction",
+          "stem": "S",
+          "branches": [
+            "W",
+            "E"
+          ],
+          "initial": 1
+        },
+        {
+          "id": "J3",
+          "x": 5,
+          "z": 4,
+          "ports": [
+            "W",
+            "N",
+            "S"
+          ],
+          "kind": "junction",
+          "stem": "W",
+          "branches": [
+            "N",
+            "S"
+          ],
+          "initial": 1
+        },
+        {
+          "id": "J4",
+          "x": 3,
+          "z": 0,
+          "ports": [
+            "E",
+            "W",
+            "S"
+          ],
+          "kind": "junction",
+          "stem": "E",
+          "branches": [
+            "W",
+            "S"
+          ],
+          "initial": 1
+        },
+        {
+          "id": "start",
+          "x": 0,
+          "z": 6,
+          "ports": [
+            "E"
+          ],
+          "kind": "terminus",
+          "end": "start"
+        },
+        {
+          "id": "rail_1_5",
+          "x": 1,
+          "z": 5,
+          "ports": [
+            "S",
+            "N"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "stop1",
+          "x": 1,
+          "z": 4,
+          "ports": [
+            "S",
+            "N"
+          ],
+          "kind": "station"
+        },
+        {
+          "id": "rail_1_3",
+          "x": 1,
+          "z": 3,
+          "ports": [
+            "S",
+            "N"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_1_2",
+          "x": 1,
+          "z": 2,
+          "ports": [
+            "S",
+            "E"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_2_2",
+          "x": 2,
+          "z": 2,
+          "ports": [
+            "W",
+            "E"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_3_3",
+          "x": 3,
+          "z": 3,
+          "ports": [
+            "N",
+            "S"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_3_4",
+          "x": 3,
+          "z": 4,
+          "ports": [
+            "N",
+            "E"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "stop2",
+          "x": 4,
+          "z": 4,
+          "ports": [
+            "W",
+            "E"
+          ],
+          "kind": "station"
+        },
+        {
+          "id": "rail_5_3",
+          "x": 5,
+          "z": 3,
+          "ports": [
+            "S",
+            "N"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_5_2",
+          "x": 5,
+          "z": 2,
+          "ports": [
+            "S",
+            "N"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "stop3",
+          "x": 5,
+          "z": 1,
+          "ports": [
+            "S",
+            "N"
+          ],
+          "kind": "station"
+        },
+        {
+          "id": "rail_5_0",
+          "x": 5,
+          "z": 0,
+          "ports": [
+            "S",
+            "W"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_4_0",
+          "x": 4,
+          "z": 0,
+          "ports": [
+            "E",
+            "W"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_2_0",
+          "x": 2,
+          "z": 0,
+          "ports": [
+            "E",
+            "W"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_1_0",
+          "x": 1,
+          "z": 0,
+          "ports": [
+            "E",
+            "W"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "station",
+          "x": 0,
+          "z": 0,
+          "ports": [
+            "E"
+          ],
+          "kind": "terminus"
+        },
+        {
+          "id": "rail_2_6",
+          "x": 2,
+          "z": 6,
+          "ports": [
+            "W",
+            "E"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_3_6",
+          "x": 3,
+          "z": 6,
+          "ports": [
+            "W"
+          ],
+          "kind": "terminus",
+          "end": "dead"
+        },
+        {
+          "id": "rail_4_2",
+          "x": 4,
+          "z": 2,
+          "ports": [
+            "W"
+          ],
+          "kind": "terminus",
+          "end": "dead"
+        },
+        {
+          "id": "rail_5_5",
+          "x": 5,
+          "z": 5,
+          "ports": [
+            "N",
+            "S"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_5_6",
+          "x": 5,
+          "z": 6,
+          "ports": [
+            "N"
+          ],
+          "kind": "terminus",
+          "blocked": true,
+          "end": "dead"
+        },
+        {
+          "id": "rail_3_1",
+          "x": 3,
+          "z": 1,
+          "ports": [
+            "N"
+          ],
+          "kind": "terminus",
+          "end": "dead"
+        }
+      ],
+      "start": {
+        "node": "start",
+        "exit": "E"
+      },
+      "stops": [
+        "stop1",
+        "stop2",
+        "stop3"
+      ],
+      "destination": "station",
+      "groups": [
+        [
+          "J1",
+          "J2",
+          "J3"
+        ]
+      ],
+      "initial": {
+        "J1": 1,
+        "J2": 1,
+        "J3": 1,
+        "J4": 1
+      },
+      "switches": 4,
+      "independentControls": 2,
+      "settingsChecked": 4,
+      "solutionCount": 1,
+      "canonical": {
+        "J1": 0,
+        "J2": 0,
+        "J3": 0,
+        "J4": 0
+      },
+      "route": [
+        "start",
+        "J1",
+        "rail_1_5",
+        "stop1",
+        "rail_1_3",
+        "rail_1_2",
+        "rail_2_2",
+        "J2",
+        "rail_3_3",
+        "rail_3_4",
+        "stop2",
+        "J3",
+        "rail_5_3",
+        "rail_5_2",
+        "stop3",
+        "rail_5_0",
+        "rail_4_0",
+        "J4",
+        "rail_2_0",
+        "rail_1_0",
+        "station"
+      ],
+      "routeLength": 21,
+      "outcomes": {
+        "dead-end": 3,
+        "success": 1
+      },
+      "failures": [
+        {
+          "settings": {
+            "J1": 1,
+            "J2": 1,
+            "J3": 1,
+            "J4": 1
+          },
+          "reason": "dead-end",
+          "at": "rail_3_6",
+          "objectives": 0,
+          "route": [
+            "start",
+            "J1",
+            "rail_2_6",
+            "rail_3_6"
+          ]
+        },
+        {
+          "settings": {
+            "J1": 0,
+            "J2": 0,
+            "J3": 0,
+            "J4": 1
+          },
+          "reason": "dead-end",
+          "at": "rail_3_1",
+          "objectives": 3,
+          "route": [
+            "start",
+            "J1",
+            "rail_1_5",
+            "stop1",
+            "rail_1_3",
+            "rail_1_2",
+            "rail_2_2",
+            "J2",
+            "rail_3_3",
+            "rail_3_4",
+            "stop2",
+            "J3",
+            "rail_5_3",
+            "rail_5_2",
+            "stop3",
+            "rail_5_0",
+            "rail_4_0",
+            "J4",
+            "rail_3_1"
+          ]
+        },
+        {
+          "settings": {
+            "J1": 1,
+            "J2": 1,
+            "J3": 1,
+            "J4": 0
+          },
+          "reason": "dead-end",
+          "at": "rail_3_6",
+          "objectives": 0,
+          "route": [
+            "start",
+            "J1",
+            "rail_2_6",
+            "rail_3_6"
+          ]
+        }
+      ],
+      "difficulty": "Three-member atomic linkage plus an independent exit, reverse stem traversal and three ordered objectives. Compass directions differ within the shared group."
+    },
+    {
+      "id": "L15",
+      "name": [
+        "The Grand Junction",
+        "鐵道大團圓"
+      ],
+      "chapter": 3,
+      "size": 7,
+      "topology": [
+        {
+          "id": "J1",
+          "x": 3,
+          "z": 1,
+          "ports": [
+            "W",
+            "E",
+            "S"
+          ],
+          "kind": "junction",
+          "stem": "W",
+          "branches": [
+            "E",
+            "S"
+          ],
+          "initial": 1
+        },
+        {
+          "id": "J2",
+          "x": 5,
+          "z": 3,
+          "ports": [
+            "N",
+            "S",
+            "W"
+          ],
+          "kind": "junction",
+          "stem": "N",
+          "branches": [
+            "S",
+            "W"
+          ],
+          "initial": 1
+        },
+        {
+          "id": "J3",
+          "x": 3,
+          "z": 5,
+          "ports": [
+            "E",
+            "W",
+            "N"
+          ],
+          "kind": "junction",
+          "stem": "E",
+          "branches": [
+            "W",
+            "N"
+          ],
+          "initial": 1
+        },
+        {
+          "id": "J4",
+          "x": 1,
+          "z": 3,
+          "ports": [
+            "S",
+            "N",
+            "W"
+          ],
+          "kind": "junction",
+          "stem": "S",
+          "branches": [
+            "N",
+            "W"
+          ],
+          "initial": 0
+        },
+        {
+          "id": "J5",
+          "x": 3,
+          "z": 3,
+          "ports": [
+            "N",
+            "S",
+            "E"
+          ],
+          "kind": "junction",
+          "stem": "S",
+          "branches": [
+            "N",
+            "E"
+          ],
+          "initial": 0
+        },
+        {
+          "id": "rail_1_1",
+          "x": 1,
+          "z": 1,
+          "ports": [
+            "E",
+            "S"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "start",
+          "x": 2,
+          "z": 1,
+          "ports": [
+            "W",
+            "E"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "stop1",
+          "x": 4,
+          "z": 1,
+          "ports": [
+            "W",
+            "E"
+          ],
+          "kind": "station"
+        },
+        {
+          "id": "rail_5_1",
+          "x": 5,
+          "z": 1,
+          "ports": [
+            "W",
+            "S"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_5_2",
+          "x": 5,
+          "z": 2,
+          "ports": [
+            "N",
+            "S"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "stop2",
+          "x": 5,
+          "z": 4,
+          "ports": [
+            "N",
+            "S"
+          ],
+          "kind": "station"
+        },
+        {
+          "id": "rail_5_5",
+          "x": 5,
+          "z": 5,
+          "ports": [
+            "N",
+            "W"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_4_5",
+          "x": 4,
+          "z": 5,
+          "ports": [
+            "E",
+            "W"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "stop3",
+          "x": 2,
+          "z": 5,
+          "ports": [
+            "E",
+            "W"
+          ],
+          "kind": "station"
+        },
+        {
+          "id": "rail_1_5",
+          "x": 1,
+          "z": 5,
+          "ports": [
+            "E",
+            "N"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_1_4",
+          "x": 1,
+          "z": 4,
+          "ports": [
+            "S",
+            "N"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_1_2",
+          "x": 1,
+          "z": 2,
+          "ports": [
+            "S",
+            "N"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_3_2",
+          "x": 3,
+          "z": 2,
+          "ports": [
+            "N",
+            "S"
+          ],
+          "kind": "rail",
+          "blocked": true
+        },
+        {
+          "id": "rail_3_4",
+          "x": 3,
+          "z": 4,
+          "ports": [
+            "N",
+            "S"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "rail_4_3",
+          "x": 4,
+          "z": 3,
+          "ports": [
+            "E",
+            "W"
+          ],
+          "kind": "rail"
+        },
+        {
+          "id": "station",
+          "x": 0,
+          "z": 3,
+          "ports": [
+            "E"
+          ],
+          "kind": "terminus"
+        }
+      ],
+      "start": {
+        "node": "start",
+        "exit": "E"
+      },
+      "stops": [
+        "stop1",
+        "stop2",
+        "stop3"
+      ],
+      "destination": "station",
+      "groups": [
+        [
+          "J1",
+          "J3"
+        ],
+        [
+          "J2",
+          "J5"
+        ]
+      ],
+      "initial": {
+        "J1": 1,
+        "J2": 1,
+        "J3": 1,
+        "J4": 0,
+        "J5": 0
+      },
+      "switches": 5,
+      "independentControls": 3,
+      "settingsChecked": 8,
+      "solutionCount": 1,
+      "canonical": {
+        "J1": 0,
+        "J2": 0,
+        "J3": 0,
+        "J4": 1,
+        "J5": 1
+      },
+      "route": [
+        "start",
+        "J1",
+        "stop1",
+        "rail_5_1",
+        "rail_5_2",
+        "J2",
+        "stop2",
+        "rail_5_5",
+        "rail_4_5",
+        "J3",
+        "stop3",
+        "rail_1_5",
+        "rail_1_4",
+        "J4",
+        "station"
+      ],
+      "routeLength": 15,
+      "outcomes": {
+        "blocked": 4,
+        "disconnected": 2,
+        "loop": 1,
+        "success": 1
+      },
+      "failures": [
+        {
+          "settings": {
+            "J1": 1,
+            "J2": 1,
+            "J3": 1,
+            "J4": 0,
+            "J5": 0
+          },
+          "reason": "blocked",
+          "at": "rail_3_2",
+          "objectives": 0,
+          "route": [
+            "start",
+            "J1",
+            "rail_3_2"
+          ]
+        },
+        {
+          "settings": {
+            "J1": 0,
+            "J2": 1,
+            "J3": 0,
+            "J4": 0,
+            "J5": 0
+          },
+          "reason": "disconnected",
+          "at": "J5",
+          "objectives": 1,
+          "route": [
+            "start",
+            "J1",
+            "stop1",
+            "rail_5_1",
+            "rail_5_2",
+            "J2",
+            "rail_4_3",
+            "J5"
+          ]
+        },
+        {
+          "settings": {
+            "J1": 1,
+            "J2": 0,
+            "J3": 1,
+            "J4": 0,
+            "J5": 1
+          },
+          "reason": "blocked",
+          "at": "rail_3_2",
+          "objectives": 0,
+          "route": [
+            "start",
+            "J1",
+            "rail_3_2"
+          ]
+        },
+        {
+          "settings": {
+            "J1": 0,
+            "J2": 0,
+            "J3": 0,
+            "J4": 0,
+            "J5": 1
+          },
+          "reason": "loop",
+          "at": "stop3",
+          "objectives": 3,
+          "route": [
+            "start",
+            "J1",
+            "stop1",
+            "rail_5_1",
+            "rail_5_2",
+            "J2",
+            "stop2",
+            "rail_5_5",
+            "rail_4_5",
+            "J3",
+            "stop3",
+            "rail_1_5",
+            "rail_1_4",
+            "J4",
+            "rail_1_2",
+            "rail_1_1",
+            "start",
+            "J1",
+            "stop1",
+            "rail_5_1",
+            "rail_5_2",
+            "J2",
+            "stop2",
+            "rail_5_5",
+            "rail_4_5",
+            "J3",
+            "stop3"
+          ]
+        },
+        {
+          "settings": {
+            "J1": 1,
+            "J2": 1,
+            "J3": 1,
+            "J4": 1,
+            "J5": 0
+          },
+          "reason": "blocked",
+          "at": "rail_3_2",
+          "objectives": 0,
+          "route": [
+            "start",
+            "J1",
+            "rail_3_2"
+          ]
+        },
+        {
+          "settings": {
+            "J1": 0,
+            "J2": 1,
+            "J3": 0,
+            "J4": 1,
+            "J5": 0
+          },
+          "reason": "disconnected",
+          "at": "J5",
+          "objectives": 1,
+          "route": [
+            "start",
+            "J1",
+            "stop1",
+            "rail_5_1",
+            "rail_5_2",
+            "J2",
+            "rail_4_3",
+            "J5"
+          ]
+        },
+        {
+          "settings": {
+            "J1": 1,
+            "J2": 0,
+            "J3": 1,
+            "J4": 1,
+            "J5": 1
+          },
+          "reason": "blocked",
+          "at": "rail_3_2",
+          "objectives": 0,
+          "route": [
+            "start",
+            "J1",
+            "rail_3_2"
+          ]
+        }
+      ],
+      "difficulty": "Final synthesis: five junctions, two linked phases and an independent ring exit; three ordered stops; a visibly blocked central branch; wrong full-state cycles after objective progress."
+    }
+  ]
+}

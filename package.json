@@ -1,6 +1,6 @@
 {
   "name": "junctioneer",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -10,7 +10,7 @@
     "test": "vitest run",
     "test:e2e": "playwright test",
     "validate:levels": "tsx scripts/validate-levels.ts",
-    "capture": "tsx scripts/capture.ts",
+    "capture": "tsx scripts/capture-production.ts",
     "format": "prettier --write src tests scripts *.ts *.json index.html",
     "build:review": "npm run build && tsx scripts/prepare-review.ts"
   },
