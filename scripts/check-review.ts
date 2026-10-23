@@ -36,14 +36,24 @@ await expect(
 await expect(page.locator("figure")).toHaveCount(14);
 for (const image of await page.locator("figure img").all()) {
   const src = await image.getAttribute("src");
-  const result = await page.request.get(`${base}review/${src}`);
-  expect(result.status()).toBe(200);
+  const result = await page.evaluate(async (url) => {
+    const response = await fetch(url);
+    const digest = await crypto.subtle.digest(
+      "SHA-256",
+      await response.arrayBuffer(),
+    );
+    return {
+      status: response.status,
+      sha256: Array.from(new Uint8Array(digest))
+        .map((v) => v.toString(16).padStart(2, "0"))
+        .join(""),
+    };
+  }, `${base}review/${src}`);
+  expect(result.status).toBe(200);
   const original = await readFile(`docs/${src}`);
-  expect(
-    createHash("sha256")
-      .update(await result.body())
-      .digest("hex"),
-  ).toBe(createHash("sha256").update(original).digest("hex"));
+  expect(result.sha256).toBe(
+    createHash("sha256").update(original).digest("hex"),
+  );
 }
 await page.locator("video").evaluate((v: HTMLVideoElement) => v.load());
 await expect
